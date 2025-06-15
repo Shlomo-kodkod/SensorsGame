@@ -29,12 +29,12 @@ namespace SensorsGame
             return this.sensors;
         }
 
-        internal override bool IsCorrect(Sensor sensor, int index)
+        internal override bool IsCorrect(string type, int index)
         {
             if ((index >= 0) && (index < this.GetSensorsCount()))
             {
                string  currType = this.sensors[index].GetType();
-                return  currType == sensor.GetType();
+                return  currType == type;
             }
             return false;
         }
