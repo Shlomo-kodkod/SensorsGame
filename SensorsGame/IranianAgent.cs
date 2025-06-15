@@ -9,15 +9,15 @@ namespace SensorsGame
     internal abstract class IranianAgent
     {
         Sensor[] sensors;
-
         string rank;
         int sensorSlots;
-
+        int exposedNum;
 
         internal abstract int GetSensorsCount();
         internal abstract Sensor[] GetAgentSensors();
-        internal abstract bool IsCorrect(Sensor sensor);
-        internal abstract bool IsExposed(Sensor[] sensors);
+        internal abstract bool IsCorrect(Sensor sensor, int index);
+        internal abstract bool IsExposed();
+        internal abstract void UpdateExposedNum();
 
 
     }
