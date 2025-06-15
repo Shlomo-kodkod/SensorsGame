@@ -11,5 +11,7 @@ namespace SensorsGame
         string type;
 
         internal abstract string Activate();
+
+        internal abstract string GetType();
     }
 }
