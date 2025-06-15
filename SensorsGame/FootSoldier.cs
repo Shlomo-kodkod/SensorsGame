@@ -24,17 +24,32 @@ namespace SensorsGame
             return this.sensorSlots;
         }
 
-        internal override Sensor[] GetAgentSensors()
+        
+
+        internal override Dictionary<string, int> GetAgentSensors()
         {
-            return this.sensors;
+            Dictionary<string, int> result = new Dictionary<string, int>();
+
+            foreach(Sensor sensor in this.sensors)
+            {
+                if (result.ContainsKey(sensor.GetType()))
+                {
+                    result[sensor.GetType()]++; 
+                }
+                else
+                {
+                    result[sensor.GetType()] = 1;
+                }
+            }
+
+            return result;
         }
 
-        internal override bool IsCorrect(string type, int index)
+        internal override bool IsCorrect(string type, Dictionary<string, int> agentSensor)
         {
-            if ((index >= 0) && (index < this.GetSensorsCount()))
+            if (agentSensor.ContainsKey(type) && agentSensor[type] > 0)
             {
-               string  currType = this.sensors[index].GetType();
-                return  currType == type;
+                return true;
             }
             return false;
         }

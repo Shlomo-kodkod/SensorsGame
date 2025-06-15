@@ -14,8 +14,8 @@ namespace SensorsGame
         int exposedNum;
 
         internal abstract int GetSensorsCount();
-        internal abstract Sensor[] GetAgentSensors();
-        internal abstract bool IsCorrect(Sensor sensor, int index);
+        internal abstract Dictionary<string, int> GetAgentSensors();
+        internal abstract bool IsCorrect(string type, Dictionary<string, int> agentSensor);
         internal abstract bool IsExposed();
         internal abstract void UpdateExposedNum();
 
