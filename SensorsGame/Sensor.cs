@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal abstract class Sensor
+    internal class Sensor : ISensor
     {
-        string type;
+        string type { get; set; }
+        internal string Activate()
+        {
+            return $"{this.type} is active.";
+        }
 
-        internal abstract string Activate();
-
-        internal abstract string GetType();
+        internal string GetType()
+        {
+            return this.type;
+        }
     }
 }

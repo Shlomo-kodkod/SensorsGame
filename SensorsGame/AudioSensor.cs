@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class AudioSensor : Sensor 
+    internal class AudioSensor : Sensor
     {
-        string type = "Audio Sensor";
-        internal override string Activate()
+        public AudioSensor()
         {
-            return $"{this.type} is active.";
-        }
-
-        internal override string GetType()
-        {
-            return this.type;
+            this.type = "Audio Sensor";
         }
     }
 }

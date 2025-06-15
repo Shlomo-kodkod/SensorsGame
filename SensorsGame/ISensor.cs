@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class Class1
+    internal interface ISensor
     {
+        public string type { get; set; }
+
+        public string Activate();
+
+        public string GetType();
     }
 }

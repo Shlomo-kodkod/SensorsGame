@@ -6,18 +6,71 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal abstract class IranianAgent
+    internal class IranianAgent : IIranianAgent
     {
-        Sensor[] sensors;
-        string rank;
-        int sensorSlots;
-        int exposedNum;
+        public Sensor[] sensors { get; set; }
+        public string rank { get; set; }
+        public int sensorSlots { get; set; }
+        public int exposedNum { get; set; }
 
-        internal abstract int GetSensorsCount();
-        internal abstract Dictionary<string, int> GetAgentSensors();
-        internal abstract bool IsCorrect(string type, Dictionary<string, int> agentSensor);
-        internal abstract bool IsExposed();
-        internal abstract void UpdateExposedNum();
+
+        public IranianAgent(Sensor[] Sensors)
+        {
+            this.sensors = Sensors;
+
+        }
+        public int GetSensorsCount()
+        {
+            return this.sensorSlots;
+        }
+
+
+
+        public Dictionary<string, int> GetAgentSensors()
+        {
+            Dictionary<string, int> result = new Dictionary<string, int>();
+
+            foreach(Sensor sensor in this.sensors)
+            {
+                if (result.ContainsKey(sensor.GetType()))
+                {
+                    result[sensor.GetType()]++; 
+                }
+                else
+                {
+                    result[sensor.GetType()] = 1;
+                }
+            }
+
+            return result;
+        }
+
+        public bool IsCorrect(string type, Dictionary<string, int> agentSensor)
+        {
+            if (agentSensor.ContainsKey(type) && agentSensor[type] > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsExposed()
+        {
+            return this.exposedNum == this.sensorSlots;
+        }
+
+        public void UpdateExposedNum()
+        {
+            this.exposedNum++;
+        }
+
+        public void GetValidSensorType()
+        {
+            foreach(Sensor sensor in this.sensors)
+            {
+                Console.Write(sensor.GetType() + " ");
+            }
+        }
 
 
     }
