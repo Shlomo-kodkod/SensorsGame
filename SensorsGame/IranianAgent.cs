@@ -10,7 +10,9 @@ namespace SensorsGame
     {
         Sensor[] sensors;
 
-        string type;
+        string rank;
+        int sensorSlots;
+
 
         internal abstract int GetSensorsCount();
         internal abstract Sensor[] GetAgentSensors();
