@@ -10,13 +10,8 @@ namespace SensorsGame
     {
         internal static void Main()
         {
-            Random random = new Random();
-            for (int i = 0; i < 30; i++)
-            {
-                int choice = random.Next(0, 1);
-                Console.WriteLine(choice);
-            }
-
+            Menu m = new Menu();
+            m.DisplayEntryScreen();
         }
     }
 }

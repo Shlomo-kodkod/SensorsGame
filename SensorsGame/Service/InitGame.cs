@@ -11,7 +11,7 @@ namespace SensorsGame
         Random random= new Random();
        
 
-        internal Sensor[] InitSensors(int sensorSlots)
+        public Sensor[] InitSensors(int sensorSlots)
         {
             Sensor[] sensorsOptions = new Sensor[sensorSlots];
 
@@ -30,7 +30,7 @@ namespace SensorsGame
             return sensorsOptions;
         }
 
-        internal IranianAgent InitAgent()
+        public IranianAgent InitAgent()
         {
             IranianAgent result = null;
             int choice = random.Next(0, 1);
