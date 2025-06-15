@@ -10,15 +10,16 @@ namespace SensorsGame
     {
         IranianAgent agent;
         Dictionary<string, int> agentSensors;
+        List<string> correctGuessSensor = new List<string>();
 
 
-        internal GameManager(InitGame initGame)
+        public GameManager(InitGame initGame)
         {
             this.agent = initGame.InitAgent();
             this.agentSensors = agent.GetAgentSensors();
         }
 
-        internal void UpdateAgentSensors(string type)
+        public void UpdateAgentSensors(string type)
         {
             if ((this.agentSensors.ContainsKey(type)) && (this.agentSensors[type] > 0))
             {
@@ -27,7 +28,7 @@ namespace SensorsGame
         }
 
 
-        internal bool IsValidSensorType(string type)
+        public bool IsValidSensorType(string type)
         {
             string[] validOptions = new string[] { "Audio Sensor" };
 
@@ -39,12 +40,14 @@ namespace SensorsGame
             return false;
         }
 
-        internal string GetSensorGuess()
+        public string GetSensorGuess(IranianAgent agent)
         {
             string guess = "";
             do
             {
-                Console.WriteLine("Please enter your guess: ");
+                Console.WriteLine($"Sensor options: {agent.GetValidSensorType()}\n" + 
+                    "Please enter your guess: "
+                    );
                 guess = Console.ReadLine();
             }
             while (!IsValidSensorType(guess));
@@ -52,23 +55,28 @@ namespace SensorsGame
             return guess;
         }
 
+        public string DisplayState(IranianAgent agent)
+        {
+            return $"{agent.exposedNum}/{agent.GetSensorsCount()}";
+        }
 
-        //internal int GetIndex(IranianAgent currAgent)
-        //{
-        //    string strIndex;
-        //    int indexRange = currAgent.GetSensorsCount();
+        public void GuessSensor(IranianAgent agent, Sensor sensor)
+        {
+            string guess = GetSensorGuess(agent);
+            sensor.Activate();
 
-        //    do
-        //    {
-        //        Console.WriteLine($"Enter the sensor location: ");
-        //        strIndex = Console.ReadLine();
-        //    }
-        //    while ((!int.TryParse(strIndex, out _)) || (int.Parse(strIndex) < 0 || int.Parse(strIndex) >= indexRange));
-
-        //    return int.Parse(strIndex);
-        //}
-
-
+            if (agent.IsCorrect(guess,this.agentSensors))
+            {
+                Console.WriteLine("Good guess:)");
+                agent.UpdateExposedNum();
+                this.correctGuessSensor.Add(guess);
+            }
+            else
+            {
+                Console.WriteLine("Wrong guess. Please try again.");
+            }
+            
+        }
 
     }
 }

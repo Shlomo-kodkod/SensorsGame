@@ -18,7 +18,7 @@ namespace SensorsGame
         public bool IsCorrect(string type, Dictionary<string, int> agentSensor);
         public bool IsExposed();
         public void UpdateExposedNum();
-        public void GetValidSensorType();
+        public string GetValidSensorType();
 
 
     }

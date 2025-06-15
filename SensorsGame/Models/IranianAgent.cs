@@ -64,12 +64,15 @@ namespace SensorsGame
             this.exposedNum++;
         }
 
-        public void GetValidSensorType()
+        public string GetValidSensorType()
         {
+            string sensortypeOptions = "";
+
             foreach(Sensor sensor in this.sensors)
             {
-                Console.Write(sensor.GetType() + " ");
+               sensortypeOptions += sensor.GetType() + " ";
             }
+            return sensortypeOptions;
         }
 
 

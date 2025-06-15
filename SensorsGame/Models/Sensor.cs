@@ -8,13 +8,13 @@ namespace SensorsGame
 {
     internal class Sensor : ISensor
     {
-        string type { get; set; }
-        internal string Activate()
+        public string type { get; set; }
+        public string Activate()
         {
             return $"{this.type} is active.";
         }
 
-        internal string GetType()
+        public string GetType()
         {
             return this.type;
         }
