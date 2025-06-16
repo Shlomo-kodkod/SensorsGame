@@ -14,6 +14,12 @@ namespace SensorsGame
         public int sensorSlots { get; set; }
         public int exposedNum { get; set; }
 
+        public bool IsAttack = false;
+
+        public int attackNum;
+
+        public int turnNum = 0;
+
         public List<Sensor> guessSensors = new List<Sensor>();
 
         public IranianAgent(string[] Sensors)
