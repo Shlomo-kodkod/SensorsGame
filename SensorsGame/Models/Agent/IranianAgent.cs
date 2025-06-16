@@ -25,17 +25,6 @@ namespace SensorsGame
             return this.sensorSlots;
         }
 
-        //public List<string> GetAgentSensors()
-        //{
-        //    List<string> agentSensors = new List<string>();
-
-        //    foreach(string sensor in this.sensors)
-        //    {
-        //        agentSensors.Add(sensor);
-        //    }
-        //    return agentSensors;
-        //}
-
         public int GetSpecificCount(string type)
         {
             int count = 0;

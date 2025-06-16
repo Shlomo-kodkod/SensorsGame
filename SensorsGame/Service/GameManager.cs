@@ -10,7 +10,9 @@ namespace SensorsGame
     {
         IranianAgent agent;
         Sensor sensor = new Sensor();
-        string[] validSensorsTypes = new string[] { "Audio Sensor" };
+        string[] validSensorsTypes = new string[] { "Audio Sensor", "Thermal Sensor",
+            "Pulse Sensor", "Motion Sensor", "Magnetic" };
+        string[] validChoice = new string[] { "1", "2", "3", "4", "5" };
 
 
         public GameManager()
@@ -20,7 +22,7 @@ namespace SensorsGame
 
         public bool IsValidSensorType(string type)
         {
-            if (this.validSensorsTypes.Contains(type))
+            if (this.validChoice.Contains(type))
             {
                 return true;
             }
@@ -31,9 +33,9 @@ namespace SensorsGame
         {
             string sensortypeOptions = "";
 
-            foreach (string type in this.validSensorsTypes)
+            for (int i = 0;i < this.validChoice.Length; i++)
             {
-                sensortypeOptions += type + "\n";
+                sensortypeOptions += $"{i+1}. {this.validSensorsTypes[i]}.\n";
             }
             return sensortypeOptions;
         }
