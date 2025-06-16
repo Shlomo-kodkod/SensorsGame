@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class Menu
+    internal static class Menu
     {
-        public void DisplayEntryScreen()
+        private static GameManager gameManager = new GameManager();
+        public static void DisplayEntryScreen()
         {
-            Console.BackgroundColor.
+
             Console.WriteLine(
                 """
                   _____                     _   _             _   _             
@@ -28,6 +29,11 @@ namespace SensorsGame
                                              /_/ 
                 """
                 );
+        }
+
+        public static void Play()
+        {
+            gameManager.StartPlay();
         }
 
 

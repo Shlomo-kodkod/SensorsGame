@@ -8,48 +8,55 @@ namespace SensorsGame
 {
     internal class IranianAgent : IIranianAgent
     {
-        public Sensor[] sensors { get; set; }
+
+        public string[] sensors { get; set; }
         public string rank { get; set; }
         public int sensorSlots { get; set; }
         public int exposedNum { get; set; }
 
+        private List<Sensor> guessSensors = new List<Sensor>();
 
-        public IranianAgent(Sensor[] Sensors)
+        public IranianAgent(string[] Sensors)
         {
             this.sensors = Sensors;
-
         }
         public int GetSensorsCount()
         {
             return this.sensorSlots;
         }
 
+        //public List<string> GetAgentSensors()
+        //{
+        //    List<string> agentSensors = new List<string>();
 
+        //    foreach(string sensor in this.sensors)
+        //    {
+        //        agentSensors.Add(sensor);
+        //    }
+        //    return agentSensors;
+        //}
 
-        public Dictionary<string, int> GetAgentSensors()
+        public int GetSpecificCount(string type)
         {
-            Dictionary<string, int> result = new Dictionary<string, int>();
-
-            foreach(Sensor sensor in this.sensors)
+            int count = 0;
+            foreach(Sensor sensor in this.guessSensors)
             {
-                if (result.ContainsKey(sensor.GetType()))
+                if (sensor.type == type)
                 {
-                    result[sensor.GetType()]++; 
-                }
-                else
-                {
-                    result[sensor.GetType()] = 1;
+                    count++;
                 }
             }
-
-            return result;
+            return count;
         }
 
-        public bool IsCorrect(string type, Dictionary<string, int> agentSensor)
+        public bool IsCorrect(string type)
         {
-            if (agentSensor.ContainsKey(type) && agentSensor[type] > 0)
+            if (this.sensors.Contains(type))
             {
-                return true;
+                if ((GetSpecificCount(type) == 0) || (GetSpecificCount(type) < this.sensors.Count(cnt => cnt == type)))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -64,17 +71,20 @@ namespace SensorsGame
             this.exposedNum++;
         }
 
-        public string GetValidSensorType()
+        public void RemoveSensor(string seneorType)
         {
-            string sensortypeOptions = "";
-
-            foreach(Sensor sensor in this.sensors)
+            foreach(Sensor sensor in this.guessSensors)
             {
-               sensortypeOptions += sensor.GetType() + " ";
+                if (sensor.type == seneorType)
+                {
+                    this.guessSensors.Remove(sensor);
+                }
             }
-            return sensortypeOptions;
         }
 
-
+        public void AddSensore(Sensor sensor)
+        {
+            this.guessSensors.Add(sensor);
+        }
     }
 }

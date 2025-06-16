@@ -9,74 +9,82 @@ namespace SensorsGame
     internal class GameManager
     {
         IranianAgent agent;
-        Dictionary<string, int> agentSensors;
-        List<string> correctGuessSensor = new List<string>();
+        Sensor sensor = new Sensor();
+        string[] validSensorsTypes = new string[] { "Audio Sensor" };
 
 
-        public GameManager(InitGame initGame)
+        public GameManager()
         {
-            this.agent = initGame.InitAgent();
-            this.agentSensors = agent.GetAgentSensors();
+            this.agent = InitGame.InitAgent();
         }
-
-        public void UpdateAgentSensors(string type)
-        {
-            if ((this.agentSensors.ContainsKey(type)) && (this.agentSensors[type] > 0))
-            {
-                this.agentSensors[type]--;
-            }
-        }
-
 
         public bool IsValidSensorType(string type)
         {
-            string[] validOptions = new string[] { "Audio Sensor" };
-
-            if (validOptions.Contains(type))
+            if (this.validSensorsTypes.Contains(type))
             {
                 return true;
             }
             Console.WriteLine("Invalid sensor type. please try again.");
             return false;
         }
+        public string GetSensorTypes()
+        {
+            string sensortypeOptions = "";
 
-        public string GetSensorGuess(IranianAgent agent)
+            foreach (string type in this.validSensorsTypes)
+            {
+                sensortypeOptions += type + "\n";
+            }
+            return sensortypeOptions;
+        }
+
+        public Sensor ConvertStringToSensor(string type)
+        {
+            Sensor newSensor = null;
+            switch (type)
+            {
+                case "Audio Sensor":
+                    newSensor = new AudioSensor();
+                    break;
+            }
+            return newSensor;
+        }
+        public Sensor GetSensorGuess(IranianAgent agent)
         {
             string guess = "";
+            Sensor newSensor = null;
             do
             {
-                Console.WriteLine($"Sensor options: {agent.GetValidSensorType()}\n" + 
+                Console.WriteLine($"Sensor options: {GetSensorTypes()}\n" + 
                     "Please enter your guess: "
                     );
                 guess = Console.ReadLine();
             }
             while (!IsValidSensorType(guess));
 
-            return guess;
+            return ConvertStringToSensor(guess);
         }
 
         public string DisplayState(IranianAgent agent)
         {
-            return $"{agent.exposedNum}/{agent.GetSensorsCount()}";
-        }
+            return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
+        }   
 
-        public void GuessSensor(IranianAgent agent, Sensor sensor)
+        public void GuessSensor(IranianAgent agent)
         {
-            string guess = GetSensorGuess(agent);
-            sensor.Activate();
-
-            if (agent.IsCorrect(guess,this.agentSensors))
-            {
-                Console.WriteLine("Good guess:)");
-                agent.UpdateExposedNum();
-                this.correctGuessSensor.Add(guess);
-            }
-            else
-            {
-                Console.WriteLine("Wrong guess. Please try again.");
-            }
-            
+            Sensor guess = GetSensorGuess(agent);
+            sensor.Activate(agent,guess); 
         }
 
+        public void StartPlay()
+        {
+            do
+            {
+                GuessSensor(agent);
+                Console.WriteLine(DisplayState(agent));
+            }
+            while (!agent.IsExposed());
+            Console.WriteLine("Good Game. Bey bey.");
+        }   
     }
 }

@@ -6,42 +6,40 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class InitGame
+    internal static class InitGame
     {
-        Random random= new Random();
-       
+        private static Random random= new Random();
+        private static string[] sensorOption = new string[] { "Audio Sensor" };
 
-        public Sensor[] InitSensors(int sensorSlots)
+        public static string[] InitSensors(int sensorSlots)
         {
-            Sensor[] sensorsOptions = new Sensor[sensorSlots];
+            string[] sensorsOptions = new string[sensorSlots];
 
             for (int i = 0; i <= sensorSlots; i++)
             {
-                int choice = random.Next(0, 1);
+                int choice = random.Next(0, sensorOption.Length);
                 switch (choice)
                 {
                     case 0:
-                        sensorsOptions.Append(new AudioSensor());
-                        break;
-                    
+                        sensorsOptions.Append("Audio Sensor");
+                        break;    
                 }
             }
-
             return sensorsOptions;
         }
 
-        public IranianAgent InitAgent()
+        public static IranianAgent InitAgent(string agentType = "")
         {
             IranianAgent result = null;
-            int choice = random.Next(0, 1);
-            switch (choice)
+            switch (agentType)
             {
-                case 0:
+                case "Foot Soldier":
                     result = new FootSoldier(InitSensors(2));
                     break;
-
+                default:
+                    result = new FootSoldier(InitSensors(2));
+                    break;
             }
-
             return result;
         }
 

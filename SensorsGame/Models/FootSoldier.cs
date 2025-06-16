@@ -8,7 +8,7 @@ namespace SensorsGame
 {
     internal class FootSoldier : IranianAgent
     {
-        public FootSoldier(Sensor[] sensor) : base(sensor)
+        public FootSoldier(string[] sensor) : base(sensor)
         {
             this.rank = "Foot Soldier";
             this.sensorSlots = 2;

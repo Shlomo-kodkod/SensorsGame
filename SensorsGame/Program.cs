@@ -10,8 +10,9 @@ namespace SensorsGame
     {
         internal static void Main()
         {
-            Menu m = new Menu();
-            m.DisplayEntryScreen();
+            
+            Menu.DisplayEntryScreen();
+            Menu.Play();
         }
     }
 }

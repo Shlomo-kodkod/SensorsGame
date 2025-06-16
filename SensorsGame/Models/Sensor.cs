@@ -9,9 +9,13 @@ namespace SensorsGame
     internal class Sensor : ISensor
     {
         public string type { get; set; }
-        public string Activate()
+        public void Activate(IranianAgent agent, Sensor sensor)
         {
-            return $"{this.type} is active.";
+            if (agent.IsCorrect(this.type))
+            {
+                agent.AddSensore(sensor);
+                agent.UpdateExposedNum();
+            }
         }
 
         public string GetType()
