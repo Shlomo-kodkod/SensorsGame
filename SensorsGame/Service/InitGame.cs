@@ -19,31 +19,31 @@ namespace SensorsGame
         {
             string[] sensorsOptions = new string[sensorSlots];
 
-            for (int i = 0; i <= sensorSlots; i++)
+            for (int i = 0; i < sensorSlots; i++)
             {
                 int choice = random.Next(0, sensorOption.Length);
                 switch (choice)
                 {
                     case 0:
-                        sensorsOptions.Append(sensorOption[0]);
+                        sensorsOptions[i] = sensorOption[0];
                         break;
                     case 1:
-                        sensorsOptions.Append(sensorOption[1]);
+                        sensorsOptions[i] = sensorOption[1];
                         break;
                     case 2:
-                        sensorsOptions.Append(sensorOption[2]);
+                        sensorsOptions[i] = sensorOption[2];
                         break;
                     case 3:
-                        sensorsOptions.Append(sensorOption[4]);
+                        sensorsOptions[i] = sensorOption[3];
                         break;
                     case 4:
-                        sensorsOptions.Append(sensorOption[4]);
+                        sensorsOptions[i] = sensorOption[4];
                         break;
                     case 5:
-                        sensorsOptions.Append(sensorOption[5]);
+                        sensorsOptions[i] = sensorOption[5];
                         break;
                     case 6:
-                        sensorsOptions.Append(sensorOption[6]);
+                        sensorsOptions[i] = sensorOption[6];
                         break;
                 }
             }

@@ -14,12 +14,12 @@ namespace SensorsGame
             this.type = "Thermal Sensor";
         }
 
-        public override void Activate(IranianAgent agent, Sensor sensor)
+        public override void Activate(IranianAgent agent)
         {
             if (agent.IsCorrect(this.type))
             {
                 Console.WriteLine($"You exposed a sensor from the secret list. Sensor name: {RevealsOneSensore(agent)}");
-                agent.AddSensore(sensor);
+                agent.AddSensore(this);
                 agent.UpdateExposedNum();
             }
         }

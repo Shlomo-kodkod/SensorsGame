@@ -48,7 +48,8 @@ namespace SensorsGame
         {
             if (this.sensors.Contains(type))
             {
-                if ((GetSpecificCount(type) == 0) || (GetSpecificCount(type) < this.sensors.Count(cnt => cnt == type)))
+                int currSensorCount = GetSpecificCount(type);
+                if ((currSensorCount == 0) || (currSensorCount < this.sensors.Count(cnt => cnt == type)))
                 {
                     return true;
                 }

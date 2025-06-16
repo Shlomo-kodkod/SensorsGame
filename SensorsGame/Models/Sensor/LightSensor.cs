@@ -8,7 +8,7 @@ namespace SensorsGame
 {
     internal class LightSensor : Sensor
     {
-        public override void Activate(IranianAgent agent, Sensor sensor)
+        public override void Activate(IranianAgent agent)
         {
 
             if (agent.IsCorrect(this.type))
@@ -17,7 +17,7 @@ namespace SensorsGame
                     $"Agent rank is: {agent.rank}\n" +
                     $"Agent Sensor slots is: {agent.sensorSlots}"
                     );
-                agent.AddSensore(sensor);
+                agent.AddSensore(this);
                 agent.UpdateExposedNum();
             }
         }

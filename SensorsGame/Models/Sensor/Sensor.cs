@@ -16,11 +16,11 @@ namespace SensorsGame
 
         public int cancelsAttackSum { get; set; }
 
-        public virtual void Activate(IranianAgent agent, Sensor sensor)
+        public virtual void Activate(IranianAgent agent)
         {
             if (agent.IsCorrect(this.type))
             {
-                agent.AddSensore(sensor);
+                agent.AddSensore(this);
                 agent.UpdateExposedNum();
             }
         }

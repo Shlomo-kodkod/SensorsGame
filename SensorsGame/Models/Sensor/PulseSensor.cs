@@ -13,11 +13,11 @@ namespace SensorsGame
             this.type = "Pulse Sensor";
         }
 
-        public override void Activate(IranianAgent agent, Sensor sensor)
+        public override void Activate(IranianAgent agent)
         {
             if (agent.IsCorrect(this.type))
             {
-                agent.AddSensore(sensor);
+                agent.AddSensore(this);
                 agent.UpdateExposedNum();
             }
         }
