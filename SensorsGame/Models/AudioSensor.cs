@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class Program
+    internal class AudioSensor : Sensor
     {
-        internal static void Main()
+        public AudioSensor()
         {
-            
-            Menu.DisplayEntryScreen();
-            Menu.Play();
+            this.type = "Audio Sensor";
         }
     }
 }
