@@ -45,7 +45,7 @@ namespace SensorsGame
             Sensor newSensor = null;
             switch (type)
             {
-                case "Audio Sensor":
+                case "1":
                     newSensor = new AudioSensor();
                     break;
             }
@@ -57,7 +57,7 @@ namespace SensorsGame
             Sensor newSensor = null;
             do
             {
-                Console.WriteLine($"Sensor options: {GetSensorTypes()}\n" + 
+                Console.WriteLine($"---Sensor options---\n {GetSensorTypes()}\n" + 
                     "Please enter your guess: "
                     );
                 guess = Console.ReadLine();
