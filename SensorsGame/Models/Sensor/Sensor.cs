@@ -14,6 +14,8 @@ namespace SensorsGame
 
         public bool isCancelsCounterAttack = false;
 
+        public int cancelsAttackSum { get; set; }
+
         public virtual void Activate(IranianAgent agent, Sensor sensor)
         {
             if (agent.IsCorrect(this.type))
