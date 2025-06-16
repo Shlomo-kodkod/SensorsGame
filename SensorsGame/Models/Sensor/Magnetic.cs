@@ -11,6 +11,12 @@ namespace SensorsGame
         public Magnetic()
         {
             this.isCancelsCounterAttack = true;
+            this.cancelsAttackSum = 0;
+        }
+
+        public void UpdateCancelAttack()
+        {
+            this.cancelsAttackSum++;
         }
     }
 }

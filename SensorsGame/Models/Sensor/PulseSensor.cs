@@ -8,7 +8,6 @@ namespace SensorsGame
 {
     internal class PulseSensor : Sensor
     {
-        private bool IsBroken = false;
         public PulseSensor()
         {
             this.type = "Pulse Sensor";
@@ -23,13 +22,5 @@ namespace SensorsGame
             }
         }
 
-        public bool GetStatus()
-        {
-            return this.IsBroken;
-        }
-        public void ChangeStatus()
-        {
-            this.IsBroken = true;
-        }
     }
 }
