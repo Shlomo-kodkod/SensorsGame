@@ -75,7 +75,9 @@ namespace SensorsGame
         public void GuessSensor(IranianAgent agent)
         {
             Sensor guess = GetSensorGuess(agent);
-            sensor.Activate(agent,guess); 
+            sensor.Activate(agent,guess);
+            UpdateActiveNum(agent);
+            RemoveBreakableSensore(agent);
         }
 
         public void StartPlay()
@@ -88,5 +90,28 @@ namespace SensorsGame
             while (!agent.IsExposed());
             Console.WriteLine("Good Game. Bey bey.");
         }   
+
+        public void UpdateActiveNum(IranianAgent agent)
+        {
+            foreach(Sensor sensor in agent.guessSensors)
+            {
+                sensor.activeateSum++;
+            }
+        }
+        public void RemoveBreakableSensore(IranianAgent agent)
+        {
+            string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
+
+            for(int i= 0; i < agent.guessSensors.Count();i++)
+            {
+                if (breakableSensors.Contains(agent.guessSensors[i].type) && (agent.guessSensors[i].activeateSum == 3))
+                {
+                    Console.WriteLine($"Sensor {agent.guessSensors[i].type} break.");
+                    agent.RemoveSensor(i);
+                }
+            }
+            
+        }
+
     }
 }

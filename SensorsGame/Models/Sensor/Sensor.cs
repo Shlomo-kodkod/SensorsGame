@@ -9,6 +9,10 @@ namespace SensorsGame
     internal class Sensor : ISensor
     {
         public string type { get; set; }
+        public bool IsBroken { get; set; }
+
+        public int activeateSum = 0;
+
         public virtual void Activate(IranianAgent agent, Sensor sensor)
         {
             if (agent.IsCorrect(this.type))
