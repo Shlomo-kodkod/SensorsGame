@@ -14,7 +14,7 @@ namespace SensorsGame
         public int sensorSlots { get; set; }
         public int exposedNum { get; set; }
 
-        private List<Sensor> guessSensors = new List<Sensor>();
+        public List<Sensor> guessSensors = new List<Sensor>();
 
         public IranianAgent(string[] Sensors)
         {
@@ -24,17 +24,6 @@ namespace SensorsGame
         {
             return this.sensorSlots;
         }
-
-        //public List<string> GetAgentSensors()
-        //{
-        //    List<string> agentSensors = new List<string>();
-
-        //    foreach(string sensor in this.sensors)
-        //    {
-        //        agentSensors.Add(sensor);
-        //    }
-        //    return agentSensors;
-        //}
 
         public int GetSpecificCount(string type)
         {
@@ -71,15 +60,9 @@ namespace SensorsGame
             this.exposedNum++;
         }
 
-        public void RemoveSensor(string seneorType)
+        public void RemoveSensor(int index)
         {
-            foreach(Sensor sensor in this.guessSensors)
-            {
-                if (sensor.type == seneorType)
-                {
-                    this.guessSensors.Remove(sensor);
-                }
-            }
+           this.guessSensors.RemoveAt(index);
         }
 
         public void AddSensore(Sensor sensor)
