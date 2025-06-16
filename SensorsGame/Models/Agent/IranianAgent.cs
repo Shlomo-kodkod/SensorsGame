@@ -53,16 +53,6 @@ namespace SensorsGame
 
         public bool IsCorrect(string type)
         {
-            //if (this.sensors.Contains(type))
-            //{
-            //    int currSensorCount = GetSpecificCount(type);
-            //    if ((currSensorCount == 0) || (currSensorCount < this.sensors.Count(cnt => cnt == type)))
-            //    {
-            //        return true;
-            //    }
-            //}
-            //return false;
-
             for (int i = 0; i < sensors.Length; i++)
             {
                 if ((sensors[i] == type) && (!isSensorExposed[i]))
