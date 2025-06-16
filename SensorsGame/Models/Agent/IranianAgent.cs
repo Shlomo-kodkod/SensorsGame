@@ -22,9 +22,16 @@ namespace SensorsGame
 
         public List<Sensor> guessSensors = new List<Sensor>();
 
+        public bool[] isSensorExposed;
+
         public IranianAgent(string[] Sensors)
         {
             this.sensors = Sensors;
+            this.isSensorExposed = new bool[sensors.Length];
+            for(int i = 0; i < sensors.Length; i++)
+            {
+                this.isSensorExposed[i] = false;
+            }
         }
         public int GetSensorsCount()
         {
@@ -46,10 +53,19 @@ namespace SensorsGame
 
         public bool IsCorrect(string type)
         {
-            if (this.sensors.Contains(type))
+            //if (this.sensors.Contains(type))
+            //{
+            //    int currSensorCount = GetSpecificCount(type);
+            //    if ((currSensorCount == 0) || (currSensorCount < this.sensors.Count(cnt => cnt == type)))
+            //    {
+            //        return true;
+            //    }
+            //}
+            //return false;
+
+            for (int i = 0; i < sensors.Length; i++)
             {
-                int currSensorCount = GetSpecificCount(type);
-                if ((currSensorCount == 0) || (currSensorCount < this.sensors.Count(cnt => cnt == type)))
+                if ((sensors[i] == type) && (!isSensorExposed[i]))
                 {
                     return true;
                 }
@@ -57,14 +73,36 @@ namespace SensorsGame
             return false;
         }
 
+        public void UpdateIsSensorExposed(string type)
+        {
+            for (int i = 0; i < this.sensors.Length; i++)
+            {
+                if (this.sensors[i] == type && this.isSensorExposed[i])
+                {
+                    this.isSensorExposed[i] = false;
+                    break;
+                }
+                else if ((this.sensors[i] == type) && (!this.isSensorExposed[i]))
+                {
+                    this.isSensorExposed[i] = true;
+                    break;
+                }
+            }
+        }
+
         public bool IsExposed()
         {
             return this.exposedNum == this.sensorSlots;
         }
 
-        public void UpdateExposedNum()
+        public void AddExposedNum()
         {
-            this.exposedNum++;
+            ++this.exposedNum;
+        }
+
+        public void SubExposedNum()
+        {
+            --this.exposedNum;
         }
 
         public void RemoveSensor(int index)

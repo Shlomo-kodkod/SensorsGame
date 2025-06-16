@@ -12,6 +12,5 @@ namespace SensorsGame
 
         public void Activate(IranianAgent agent);
 
-        public string GetType();
     }
 }

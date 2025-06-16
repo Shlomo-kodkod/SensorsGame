@@ -18,7 +18,7 @@ namespace SensorsGame
             if (agent.IsCorrect(this.type))
             {
                 agent.AddSensore(this);
-                agent.UpdateExposedNum();
+                agent.AddExposedNum();
             }
         }
 

@@ -42,36 +42,36 @@ namespace SensorsGame
             return sensortypeOptions;
         }
 
-        public Sensor ConvertStringToSensor(string type)
+        public string ConvertChoiceTostring(string type)
         {
-            Sensor newSensor = null;
+            string newSensor = " ";
             switch (type)
             {
                 case "1":
-                    newSensor = new AudioSensor();
+                    newSensor = "Audio Sensor";
                     break;
                 case "2":
-                    newSensor = new ThermalSensor();
+                    newSensor = "Thermal Sensor";
                     break;
                 case "3":
-                    newSensor = new PulseSensor();
+                    newSensor =  "Pulse Sensor";
                     break;
                 case "4":
-                    newSensor = new MotionSensor();
+                    newSensor = "Motion Sensor";
                     break;
                 case "5":
-                    newSensor = new Magnetic();
+                    newSensor = "Magnetic";
                     break;
                 case "6":
-                    newSensor = new SignalSensor();
+                    newSensor = "Signal Sensor";
                     break;
                 case "7":
-                    newSensor = new LightSensor();
+                    newSensor = "LightSensor";
                     break;
             }
             return newSensor;
         }
-        public Sensor GetSensorGuess(IranianAgent agent)
+        public string GetSensorGuess(IranianAgent agent)
         {
             string guess = "";
             Sensor newSensor = null;
@@ -84,7 +84,7 @@ namespace SensorsGame
             }
             while (!IsValidSensorType(guess));
 
-            return InitGame.CreatSensor(guess);
+            return guess;
         }
 
         public string DisplayState(IranianAgent agent)
@@ -94,13 +94,14 @@ namespace SensorsGame
 
         public void GuessSensor(IranianAgent agent)
         {
-            Sensor guess = GetSensorGuess(agent);
-            guess.Activate(agent);
+            string guess = GetSensorGuess(agent);
+            Sensor newSensor = InitGame.CreatSensor(guess);
+            newSensor.Activate(agent);
+            agent.UpdateIsSensorExposed(ConvertChoiceTostring(guess));
             UpdateActiveNum(agent);
-            RemoveBreakableSensore(agent);
             agent.turnNum++;
+            //RemoveBreakableSensore(agent);
         }
-
         public void StartPlay()
         {
             do
@@ -111,7 +112,6 @@ namespace SensorsGame
             while (!agent.IsExposed());
             Console.WriteLine("Good Game. Bey bey.");
         }   
-
         public void UpdateActiveNum(IranianAgent agent)
         {
             foreach(Sensor sensor in agent.guessSensors)
@@ -119,19 +119,28 @@ namespace SensorsGame
                 sensor.activeateSum++;
             }
         }
-        public void RemoveBreakableSensore(IranianAgent agent)
+        public string RemoveBreakableSensore(IranianAgent agent)
         {
             string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
+            string senType = "";
 
             for(int i = agent.guessSensors.Count() - 1; i >= 0 ;i--)
             {
-                if (breakableSensors.Contains(agent.guessSensors[i].type) && (agent.guessSensors[i].activeateSum == 3))
+                if (breakableSensors.Contains(agent.guessSensors[i].type))
                 {
-                    Console.WriteLine($"Sensor {agent.guessSensors[i].type} break.");
-                    agent.RemoveSensor(i);
+                    if (agent.guessSensors[i].activeateSum >= 3)
+                    {
+                        senType = agent.guessSensors[i].type;
+                        Console.WriteLine($"Sensor {agent.guessSensors[i].type} break.");
+                        agent.UpdateIsSensorExposed(agent.guessSensors[i].type);
+                        agent.RemoveSensor(i);
+                        agent.SubExposedNum();
+                        
+                    }
+                    
                 }
             }
-            
+            return senType;
         }
 
     }

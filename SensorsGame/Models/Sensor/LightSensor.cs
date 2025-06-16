@@ -8,6 +8,10 @@ namespace SensorsGame
 {
     internal class LightSensor : Sensor
     {
+        public LightSensor()
+        {
+            this.type = "Light Sensor";
+        }
         public override void Activate(IranianAgent agent)
         {
 
@@ -18,7 +22,7 @@ namespace SensorsGame
                     $"Agent Sensor slots is: {agent.sensorSlots}"
                     );
                 agent.AddSensore(this);
-                agent.UpdateExposedNum();
+                agent.AddExposedNum();
             }
         }
     }

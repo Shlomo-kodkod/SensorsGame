@@ -16,7 +16,7 @@ namespace SensorsGame
         public int GetSensorsCount();
         public bool IsCorrect(string type);
         public bool IsExposed();
-        public void UpdateExposedNum();
+        public void AddExposedNum();
         public void RemoveSensor(int index);
         public void AddSensore(Sensor sensor);
 

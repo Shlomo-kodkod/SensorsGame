@@ -21,13 +21,10 @@ namespace SensorsGame
             if (agent.IsCorrect(this.type))
             {
                 agent.AddSensore(this);
-                agent.UpdateExposedNum();
+                agent.AddExposedNum();
             }
         }
 
-        public string GetType()
-        {
-            return this.type;
-        }
+        
     }
 }
