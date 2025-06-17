@@ -9,7 +9,7 @@ namespace SensorsGame
     internal class GameManager
     {
         IranianAgent agent;
-        Random random = new Random();
+        private static Random random = new Random();
 
         static string[] validSensorsTypes = new string[] { "Audio Sensor", "Thermal Sensor",
             "Pulse Sensor", "Motion Sensor", "Magnetic",
@@ -23,7 +23,7 @@ namespace SensorsGame
         //    this.agent = InitGame.InitAgent();
         //}
 
-        public bool IsValidSensorType(string type)
+        public static bool IsValidSensorType(string type)
         {
             if (validChoice.Contains(type))
             {
@@ -33,7 +33,7 @@ namespace SensorsGame
             return false;
         }
 
-        public string GetSensorTypes()
+        public static string GetSensorTypes()
         {
             string sensortypeOptions = "";
 
@@ -77,7 +77,7 @@ namespace SensorsGame
             return newSensor;
         }
 
-        public string GetSensorGuess(IranianAgent agent)
+        public static string GetSensorGuess(IranianAgent agent)
         {
             string guess = "";
             Sensor newSensor = null;
@@ -94,11 +94,11 @@ namespace SensorsGame
             return guess;
         }
 
-        public string DisplayState(IranianAgent agent)
+        public static string DisplayState(IranianAgent agent)
         {
             return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
         }   
-        public string ActivateSensors(IranianAgent agent)
+        public static string ActivateSensors(IranianAgent agent)
         {
             ResetWeaknessAndSensors(agent);
             TryToAttack(agent);
@@ -117,7 +117,7 @@ namespace SensorsGame
             return guess;
         }
 
-        public string StartPlay(IranianAgent agent)
+        public static string StartPlay(IranianAgent agent)
         {
             string guess = "";
             string level = "";
@@ -137,7 +137,7 @@ namespace SensorsGame
             return level;
         }   
 
-        public void UpdateActiveNum(IranianAgent agent)
+        public static void UpdateActiveNum(IranianAgent agent)
         {
             foreach(Sensor sensor in agent.guessSensors)
             {
@@ -145,7 +145,7 @@ namespace SensorsGame
             }
         }
 
-        public bool IsAbleToCancelsAttack(IranianAgent agent)
+        public static bool IsAbleToCancelsAttack(IranianAgent agent)
         {
             foreach (Sensor sensor in agent.guessSensors)
             {
@@ -157,7 +157,7 @@ namespace SensorsGame
             return false;
         }
 
-        public void TryToAttack(IranianAgent agent)
+        public static void TryToAttack(IranianAgent agent)
         {
             if((agent.IsAttack) && (agent.attackNum > 0) &&
                 (!IsAbleToCancelsAttack(agent)) && (agent.turnNum != 0) && 
@@ -174,7 +174,7 @@ namespace SensorsGame
             }
         }
 
-        public void UpdateCancelsAttack(IranianAgent agent)
+        public static void UpdateCancelsAttack(IranianAgent agent)
         {
             foreach(Sensor sensor in agent.guessSensors)
             {
@@ -186,7 +186,7 @@ namespace SensorsGame
             }
         }
 
-        public Dictionary<int, string> GetBrokenSensors(IranianAgent agent)
+        public static Dictionary<int, string> GetBrokenSensors(IranianAgent agent)
         {
             string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
             Dictionary<int, string> sensorsMap = new Dictionary<int, string>();
@@ -202,7 +202,7 @@ namespace SensorsGame
             return sensorsMap;
         }
 
-        public void RemoveBrokenSensore(IranianAgent agent, Dictionary<int, string> sensorsMap)
+        public static void RemoveBrokenSensore(IranianAgent agent, Dictionary<int, string> sensorsMap)
         {
             if ((agent.guessSensors.Count() > 0) && (sensorsMap.Count > 0))
             {
@@ -216,7 +216,7 @@ namespace SensorsGame
             }
         }
 
-        public void ResetWeaknessAndSensors(IranianAgent agent)
+        public static void ResetWeaknessAndSensors(IranianAgent agent)
         {
             if ((agent.rank == "Organization Leader") && (agent.turnNum != 0) &&
                 (agent.turnNum % 10 == 0))

@@ -9,8 +9,7 @@ namespace SensorsGame
 {
     internal static class Menu
     {
-        private static GameManager gameManager = new GameManager();
-        private static IranianAgent agent = InitGame.InitAgent();
+        private static string[] levels = new string[] { "Foot Soldier", "Squad Leader", "Senior Commander", "Organization Leader" };
         public static void DisplayEntryScreen()
         {
 
@@ -35,16 +34,20 @@ namespace SensorsGame
 
         public static void Play()
         {
-            string level = "";
-            bool play = true;
-            while(play)
+            DisplayEntryScreen();
+            string[] playerInformation = PlayerIdentification.EnterToGame();
+            string currLevel = "";
+            bool stop = false;
+            foreach(string newLevel in levels)
             {
-                if (level.Equals("Exit") || level.Equals("Organization Leader"))
+                if(currLevel.Equals("Exit") || currLevel.Equals("Organization Leader"))
                 {
-                    play = false;
                     break;
                 }
-                level = gameManager.StartPlay(agent);
+                IranianAgent agent = InitGame.InitAgent(newLevel);
+                currLevel = GameManager.StartPlay(agent);
+                PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
+                Console.WriteLine(!stop ? "Well done, you're starting the next level..." : "");  
             }
         }
 
