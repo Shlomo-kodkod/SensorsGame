@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class Players
+    internal class Player
     {
         public string userName;
         public string secretPass;
         public int gameLevel;
         public string agentType;
-        public Players(string UserName, string SecretPass, int GameLevel, string AgentType)
+        public Player(string UserName, string SecretPass, int GameLevel, string AgentType)
         {
             this.userName = UserName;
             this.secretPass = SecretPass;

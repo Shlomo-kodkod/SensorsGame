@@ -11,20 +11,21 @@ namespace SensorsGame
     {
         private static string connStr = "server=localhost;user=root;password=;database=sensorsgame";
 
-        public static void AddPlayer(string UserName, string SecretPass, string AgentType)
+        public static void AddPlayer(string UserName, string SecretPass, int GameLevel, string AgentType)
         {
             try
             {
                 using (var conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
-                    string query = "INSERT INTO players (userName,secretPass,agentType)" +
-                    "VALUES (@userName,@,@secretPass,@agentType)";
+                    string query = "INSERT INTO players (userName,secretPass,gameLevel,agentType)" +
+                    "VALUES (@userName,@secretPass,@gameLevel,@agentType)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@userName", UserName);
                         cmd.Parameters.AddWithValue("@secretPass", SecretPass);
+                        cmd.Parameters.AddWithValue("@gameLevel", GameLevel);
                         cmd.Parameters.AddWithValue("@agentType", AgentType);
                         cmd.ExecuteNonQuery();
                     }
@@ -37,9 +38,9 @@ namespace SensorsGame
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-        public static Player GetPlayerData (string user)
+        public static Player GetPlayerData (string user, string pass)
         {
-            string query = $"SELECT * FROM players WHERE userName = @userName";
+            string query = $"SELECT * FROM players WHERE userName = @userName AND secretPass = @pass";
             Player player = null;
 
             try
@@ -50,6 +51,7 @@ namespace SensorsGame
                     using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@userName", user);
+                        cmd.Parameters.AddWithValue("@pass", pass);
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -74,19 +76,20 @@ namespace SensorsGame
             }
             return player;
         }
-        public static void UpdateLevel(string user, string type)
+        public static void UpdateLevel(string user, string pass, string type)
         {
             try
             {
                 using (var conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
-                    string query = "UPDATE players SET agentType = @level WHERE userName = @user";
+                    string query = "UPDATE players SET agentType = @level, gameLevel = gameLevel + 1 WHERE userName = @user AND secretPass = @pass";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@level", type);
                         cmd.Parameters.AddWithValue("@user", user);
+                        cmd.Parameters.AddWithValue("@pass", pass);
                         cmd.ExecuteNonQuery();
                     }
                 }
