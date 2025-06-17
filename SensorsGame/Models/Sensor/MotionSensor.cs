@@ -11,6 +11,7 @@ namespace SensorsGame
         public MotionSensor()
         {
             this.type = "Motion Sensor";
+            
         }
     }
 }

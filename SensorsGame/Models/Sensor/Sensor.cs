@@ -13,8 +13,9 @@ namespace SensorsGame
         public int activeateSum = 0;
 
         public bool isCancelsCounterAttack = false;
-
         public int cancelsAttackSum { get; set; }
+
+        public bool IsBroken = false;
 
         public virtual void Activate(IranianAgent agent)
         {

@@ -16,9 +16,9 @@ namespace SensorsGame
 
         public bool IsAttack = false;
 
-        public int attackNum;
-
         public int turnNum = 0;
+
+        public int attackNum;
 
         public List<Sensor> guessSensors = new List<Sensor>();
 
@@ -36,19 +36,6 @@ namespace SensorsGame
         public int GetSensorsCount()
         {
             return this.sensorSlots;
-        }
-
-        public int GetSpecificCount(string type)
-        {
-            int count = 0;
-            foreach(Sensor sensor in this.guessSensors)
-            {
-                if (sensor.type == type)
-                {
-                    count++;
-                }
-            }
-            return count;
         }
 
         public bool IsCorrect(string type)
@@ -97,12 +84,16 @@ namespace SensorsGame
 
         public void RemoveSensor(int index)
         {
-           this.guessSensors.RemoveAt(index);
+            if (this.guessSensors.Count() > index)
+            {
+                this.guessSensors.RemoveAt(index);
+            }
         }
 
         public void AddSensore(Sensor sensor)
         {
             this.guessSensors.Add(sensor);
         }
+
     }
 }
