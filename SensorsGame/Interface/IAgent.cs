@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal interface IIranianAgent
+    internal interface IAgent
     {
         public string[] sensors { get; set; }
         public string rank { get; set; }
@@ -19,7 +19,7 @@ namespace SensorsGame
         public void AddExposedNum();
         public void SubExposedNum();
         public void RemoveSensor(int index);
-        public void AddSensore(Sensor sensor);
+        public void DecrementExposedNum(Sensor sensor);
 
 
 

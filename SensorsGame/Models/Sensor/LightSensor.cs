@@ -21,7 +21,7 @@ namespace SensorsGame
                     $"Agent rank is: {agent.rank}\n" +
                     $"Agent Sensor slots is: {agent.sensorSlots}"
                     );
-                agent.AddSensore(this);
+                agent.DecrementExposedNum(this);
                 agent.AddExposedNum();
             }
         }

@@ -10,7 +10,7 @@ namespace SensorsGame
     {
         public string type { get; set; }
 
-        public int activeateSum = 0;
+        public int activationSum = 0;
 
         public bool isCancelsCounterAttack = false;
         public int cancelsAttackSum { get; set; }
@@ -21,7 +21,7 @@ namespace SensorsGame
         {
             if (agent.IsCorrect(this.type))
             {
-                agent.AddSensore(this);
+                agent.DecrementExposedNum(this);
                 agent.AddExposedNum();
             }
         }

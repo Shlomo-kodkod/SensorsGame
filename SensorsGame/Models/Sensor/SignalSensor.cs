@@ -20,7 +20,7 @@ namespace SensorsGame
             if (agent.IsCorrect(this.type))
             {
                 Console.WriteLine($"You've uncovered information about the agent. Agent rank is: {agent.rank}");
-                agent.AddSensore(this);
+                agent.DecrementExposedNum(this);
                 agent.AddExposedNum();
             }
         }

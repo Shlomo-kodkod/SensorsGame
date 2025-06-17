@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SensorsGame.Service;
 
 namespace SensorsGame
 {
@@ -30,8 +31,6 @@ namespace SensorsGame
                 """
                 );
         }
-
-
         public static void Play()
         {
             DisplayEntryScreen();
@@ -45,15 +44,12 @@ namespace SensorsGame
                     IsStop = true;
                     break;
                 }
-                IranianAgent agent = InitGame.InitAgent(newLevel);
+                IranianAgent agent = AgentFactory.InitAgent(newLevel);
                 currLevel = GameManager.StartPlay(agent);
                 PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
                 Console.WriteLine((IsStop is false) ? "":"Well done, you're starting the next level...");  
             }
         }
-
-
-
 
     }
 }
