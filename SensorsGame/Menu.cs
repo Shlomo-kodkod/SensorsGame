@@ -10,6 +10,7 @@ namespace SensorsGame
     internal static class Menu
     {
         private static GameManager gameManager = new GameManager();
+        private static IranianAgent agent = InitGame.InitAgent();
         public static void DisplayEntryScreen()
         {
 
@@ -31,9 +32,20 @@ namespace SensorsGame
                 );
         }
 
+
         public static void Play()
         {
-            gameManager.StartPlay();
+            string level = "";
+            bool play = true;
+            while(play)
+            {
+                if (level.Equals("Exit") || level.Equals("Organization Leader"))
+                {
+                    play = false;
+                    break;
+                }
+                level = gameManager.StartPlay(agent);
+            }
         }
 
 

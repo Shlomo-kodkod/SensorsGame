@@ -15,13 +15,13 @@ namespace SensorsGame
             "Pulse Sensor", "Motion Sensor", "Magnetic",
             "Signal Sensor", "Light Sensor"
             };
-        static string[] validChoice = new string[] { "1", "2", "3", "4", "5", "6", "7" };
+        static string[] validChoice = new string[] { "1", "2", "3", "4", "5", "6", "7", "0" };
 
 
-        public GameManager()
-        {
-            this.agent = InitGame.InitAgent();
-        }
+        //public GameManager()
+        //{
+        //    this.agent = InitGame.InitAgent();
+        //}
 
         public bool IsValidSensorType(string type)
         {
@@ -37,7 +37,7 @@ namespace SensorsGame
         {
             string sensortypeOptions = "";
 
-            for (int i = 0;i < validChoice.Length; i++)
+            for (int i = 0;i < validChoice.Length - 1; i++)
             {
                 sensortypeOptions += $"{i+1}. {validSensorsTypes[i]}.\n";
             }
@@ -49,6 +49,9 @@ namespace SensorsGame
             string newSensor = " ";
             switch (type)
             {
+                case "0":
+                    newSensor = "Exit";
+                    break;
                 case "1":
                     newSensor = "Audio Sensor";
                     break;
@@ -80,7 +83,8 @@ namespace SensorsGame
             Sensor newSensor = null;
             do
             {
-                Console.WriteLine($"---Sensor options---\n" + $"{GetSensorTypes()}\n" + 
+                Console.WriteLine($"---Sensor options---\n" + $"{GetSensorTypes()}" + 
+                    "0. Exit.\n" +
                     "Please enter your guess: "
                     );
                 guess = Console.ReadLine();
@@ -94,31 +98,43 @@ namespace SensorsGame
         {
             return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
         }   
-
-        public void ActivateSensors(IranianAgent agent)
+        public string ActivateSensors(IranianAgent agent)
         {
             ResetWeaknessAndSensors(agent);
             TryToAttack(agent);
             Dictionary<int, string> brokenSensors = GetBrokenSensors(agent);
             RemoveBrokenSensore(agent, brokenSensors);
             string guess = GetSensorGuess(agent);
+            if (guess.Equals("0"))
+            {
+                return guess;
+            }
             Sensor newSensor = InitGame.CreatSensor(guess);
             newSensor.Activate(agent);
             agent.UpdateIsSensorExposed(ConvertChoiceTostring(guess));
             UpdateActiveNum(agent);
             agent.turnNum++;
-            
+            return guess;
         }
 
-        public void StartPlay()
+        public string StartPlay(IranianAgent agent)
         {
+            string guess = "";
+            string level = "";
             do
             {
-                ActivateSensors(agent);
+                guess = ActivateSensors(agent);
                 Console.WriteLine(DisplayState(agent));
+                level = agent.rank;
+                if (guess == "0")
+                {
+                    Console.WriteLine("Exit...");
+                    level = "Exit";
+                    break;
+                }
             }
             while (!agent.IsExposed());
-            Console.WriteLine("Good Game. Bey bey.");
+            return level;
         }   
 
         public void UpdateActiveNum(IranianAgent agent)
