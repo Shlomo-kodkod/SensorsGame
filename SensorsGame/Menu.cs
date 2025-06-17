@@ -37,17 +37,18 @@ namespace SensorsGame
             DisplayEntryScreen();
             string[] playerInformation = PlayerIdentification.EnterToGame();
             string currLevel = "";
-            bool stop = false;
+            bool IsStop = false;
             foreach(string newLevel in levels)
             {
                 if(currLevel.Equals("Exit") || currLevel.Equals("Organization Leader"))
                 {
+                    IsStop = true;
                     break;
                 }
                 IranianAgent agent = InitGame.InitAgent(newLevel);
                 currLevel = GameManager.StartPlay(agent);
                 PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
-                Console.WriteLine(!stop ? "Well done, you're starting the next level..." : "");  
+                Console.WriteLine((IsStop is false) ? "":"Well done, you're starting the next level...");  
             }
         }
 
