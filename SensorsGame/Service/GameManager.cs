@@ -9,14 +9,13 @@ namespace SensorsGame
     internal class GameManager
     {
         IranianAgent agent;
-        Sensor sensor = new Sensor();
         Random random = new Random();
 
-        string[] validSensorsTypes = new string[] { "Audio Sensor", "Thermal Sensor",
+        static string[] validSensorsTypes = new string[] { "Audio Sensor", "Thermal Sensor",
             "Pulse Sensor", "Motion Sensor", "Magnetic",
             "Signal Sensor", "Light Sensor"
             };
-        string[] validChoice = new string[] { "1", "2", "3", "4", "5", "6", "7" };
+        static string[] validChoice = new string[] { "1", "2", "3", "4", "5", "6", "7" };
 
 
         public GameManager()
@@ -26,23 +25,25 @@ namespace SensorsGame
 
         public bool IsValidSensorType(string type)
         {
-            if (this.validChoice.Contains(type))
+            if (validChoice.Contains(type))
             {
                 return true;
             }
             Console.WriteLine("Invalid sensor type. please try again.");
             return false;
         }
+
         public string GetSensorTypes()
         {
             string sensortypeOptions = "";
 
-            for (int i = 0;i < this.validChoice.Length; i++)
+            for (int i = 0;i < validChoice.Length; i++)
             {
-                sensortypeOptions += $"{i+1}. {this.validSensorsTypes[i]}.\n";
+                sensortypeOptions += $"{i+1}. {validSensorsTypes[i]}.\n";
             }
             return sensortypeOptions;
         }
+
         public static string ConvertChoiceTostring(string type)
         {
             string newSensor = " ";
@@ -72,6 +73,7 @@ namespace SensorsGame
             }
             return newSensor;
         }
+
         public string GetSensorGuess(IranianAgent agent)
         {
             string guess = "";
@@ -87,10 +89,12 @@ namespace SensorsGame
 
             return guess;
         }
+
         public string DisplayState(IranianAgent agent)
         {
             return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
         }   
+
         public void ActivateSensors(IranianAgent agent)
         {
             ResetWeaknessAndSensors(agent);
@@ -105,6 +109,7 @@ namespace SensorsGame
             agent.turnNum++;
             
         }
+
         public void StartPlay()
         {
             do
@@ -115,6 +120,7 @@ namespace SensorsGame
             while (!agent.IsExposed());
             Console.WriteLine("Good Game. Bey bey.");
         }   
+
         public void UpdateActiveNum(IranianAgent agent)
         {
             foreach(Sensor sensor in agent.guessSensors)
@@ -122,6 +128,7 @@ namespace SensorsGame
                 sensor.activeateSum++;
             }
         }
+
         public bool IsAbleToCancelsAttack(IranianAgent agent)
         {
             foreach (Sensor sensor in agent.guessSensors)
@@ -133,6 +140,7 @@ namespace SensorsGame
             }
             return false;
         }
+
         public void TryToAttack(IranianAgent agent)
         {
             if((agent.IsAttack) && (agent.attackNum > 0) &&
@@ -149,6 +157,7 @@ namespace SensorsGame
 
             }
         }
+
         public void UpdateCancelsAttack(IranianAgent agent)
         {
             foreach(Sensor sensor in agent.guessSensors)
@@ -160,6 +169,7 @@ namespace SensorsGame
                 }
             }
         }
+
         public Dictionary<int, string> GetBrokenSensors(IranianAgent agent)
         {
             string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
@@ -175,6 +185,7 @@ namespace SensorsGame
             }
             return sensorsMap;
         }
+
         public void RemoveBrokenSensore(IranianAgent agent, Dictionary<int, string> sensorsMap)
         {
             if ((agent.guessSensors.Count() > 0) && (sensorsMap.Count > 0))
@@ -188,6 +199,7 @@ namespace SensorsGame
                 }
             }
         }
+
         public void ResetWeaknessAndSensors(IranianAgent agent)
         {
             if ((agent.rank == "Organization Leader") && (agent.turnNum != 0) &&
