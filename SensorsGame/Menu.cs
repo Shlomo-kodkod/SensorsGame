@@ -31,7 +31,6 @@ namespace SensorsGame
                 );
         }
 
-
         public static void Play()
         {
             DisplayEntryScreen();
