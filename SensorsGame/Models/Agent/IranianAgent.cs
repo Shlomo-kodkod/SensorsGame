@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class IranianAgent : IIranianAgent
+    internal class IranianAgent : IAgent
     {
 
         public string[] sensors { get; set; }
@@ -16,11 +16,11 @@ namespace SensorsGame
 
         public bool IsAttack = false;
 
-        public int turnNum = 0;
+        public int turnCount = 0;
 
         public int attackNum;
 
-        public List<Sensor> guessSensors = new List<Sensor>();
+        public List<Sensor> guessedSensors = new List<Sensor>();
 
         public bool[] isSensorExposed;
 
@@ -84,15 +84,15 @@ namespace SensorsGame
 
         public void RemoveSensor(int index)
         {
-            if (this.guessSensors.Count() > index)
+            if (this.guessedSensors.Count() > index)
             {
-                this.guessSensors.RemoveAt(index);
+                this.guessedSensors.RemoveAt(index);
             }
         }
 
-        public void AddSensore(Sensor sensor)
+        public void DecrementExposedNum(Sensor sensor)
         {
-            this.guessSensors.Add(sensor);
+            this.guessedSensors.Add(sensor);
         }
 
     }

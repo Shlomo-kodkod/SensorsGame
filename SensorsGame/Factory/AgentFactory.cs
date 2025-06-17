@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorsGame
+namespace SensorsGame.Service
 {
-    internal static class InitGame
+    internal static class AgentFactory
     {
-        private static Random random= new Random();
+        private static Random random = new Random();
         private static string[] sensorOption = new string[] {
             "Audio Sensor", "Thermal Sensor",
             "Pulse Sensor", "Motion Sensor", "Magnetic",
             "Signal Sensor", "Light Sensor"
         };
 
-        public static string[] InitSensorsRandom(int sensorSlots)
+        public static string[] InitializeSensorsRandom(int sensorSlots)
         {
             string[] sensorsOptions = new string[sensorSlots];
 
@@ -49,60 +49,32 @@ namespace SensorsGame
             }
             return sensorsOptions;
         }
-        public static Sensor CreatSensor(string type)
-        {
-            Sensor newSensor = null;
-            switch (type)
-            {
-                case "1":
-                    newSensor = new AudioSensor();
-                    break;
-                case "2":
-                    newSensor = new ThermalSensor();
-                    break;
-                case "3":
-                    newSensor = new PulseSensor();
-                    break;
-                case "4":
-                    newSensor = new MotionSensor();
-                    break;
-                case "5":
-                    newSensor = new Magnetic();
-                    break;
-                case "6":
-                    newSensor = new SignalSensor();
-                    break;
-                case "7":
-                    newSensor = new LightSensor();
-                    break;
-            }
-            return newSensor;
-        }
+
+
         public static IranianAgent InitAgent(string agentType = "")
         {
             IranianAgent result = null;
             switch (agentType)
             {
                 case "Foot Soldier":
-                    result = new FootSoldier(InitSensorsRandom(2));
+                    result = new FootSoldier(InitializeSensorsRandom(2));
                     break;
                 case "Squad Leader":
-                    result = new SquadLeader(InitSensorsRandom(4));
+                    result = new SquadLeader(InitializeSensorsRandom(4));
                     break;
                 case "Senior Commander":
-                    result = new SeniorCommander(InitSensorsRandom(6));
+                    result = new SeniorCommander(InitializeSensorsRandom(6));
                     break;
                 case "Organization Leader":
-                    result = new OrganizationLeader(InitSensorsRandom(8));
+                    result = new OrganizationLeader(InitializeSensorsRandom(8));
                     break;
 
                 default:
-                    result = new FootSoldier(InitSensorsRandom(2));
+                    result = new FootSoldier(InitializeSensorsRandom(2));
                     break;
             }
             return result;
         }
-
 
     }
 }

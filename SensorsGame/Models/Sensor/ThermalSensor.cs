@@ -19,7 +19,7 @@ namespace SensorsGame
             if (agent.IsCorrect(this.type))
             {
                 Console.WriteLine($"You exposed a sensor from the secret list. Sensor name: {RevealsOneSensore(agent)}");
-                agent.AddSensore(this);
+                agent.DecrementExposedNum(this);
                 agent.AddExposedNum();
             }
         }
