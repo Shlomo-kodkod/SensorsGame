@@ -43,7 +43,7 @@ namespace SensorsGame
             }
             return sensortypeOptions;
         }
-        public string ConvertChoiceTostring(string type)
+        public static string ConvertChoiceTostring(string type)
         {
             string newSensor = " ";
             switch (type)
@@ -93,6 +93,7 @@ namespace SensorsGame
         }   
         public void ActivateSensors(IranianAgent agent)
         {
+            ResetWeaknessAndSensors(agent);
             TryToAttack(agent);
             Dictionary<int, string> brokenSensors = GetBrokenSensors(agent);
             RemoveBrokenSensore(agent, brokenSensors);
@@ -184,6 +185,21 @@ namespace SensorsGame
                     agent.UpdateIsSensorExposed(item.Value);
                     agent.RemoveSensor(item.Key);
                     agent.SubExposedNum();
+                }
+            }
+        }
+        public void ResetWeaknessAndSensors(IranianAgent agent)
+        {
+            if ((agent.rank == "Organization Leader") && (agent.turnNum != 0) &&
+                (agent.turnNum % 10 == 0))
+            {
+                Console.WriteLine("Too many game attempts. Game reset.");
+                agent.sensors = InitGame.InitSensorsRandom(8);
+                agent.guessSensors.Clear();
+                agent.exposedNum = 0;
+                for(int i = 0; i < agent.isSensorExposed.Length; i++)
+                {
+                    agent.isSensorExposed[i] = false;
                 }
             }
         }

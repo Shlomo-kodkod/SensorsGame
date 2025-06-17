@@ -86,7 +86,16 @@ namespace SensorsGame
                 case "Foot Soldier":
                     result = new FootSoldier(InitSensorsRandom(2));
                     break;
-                
+                case "Squad Leader":
+                    result = new SquadLeader(InitSensorsRandom(4));
+                    break;
+                case "Senior Commander":
+                    result = new SeniorCommander(InitSensorsRandom(6));
+                    break;
+                case "Organization Leader":
+                    result = new OrganizationLeader(InitSensorsRandom(8));
+                    break;
+
                 default:
                     result = new FootSoldier(InitSensorsRandom(2));
                     break;
