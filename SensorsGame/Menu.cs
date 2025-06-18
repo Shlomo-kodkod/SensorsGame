@@ -36,19 +36,18 @@ namespace SensorsGame
             DisplayEntryScreen();
             string[] playerInformation = PlayerIdentification.EnterToGame();
             string currLevel = "";
-            bool IsStop = false;
             foreach(string newLevel in levels)
             {
                 if(currLevel.Equals("Exit") || currLevel.Equals("Organization Leader"))
                 {
-                    IsStop = true;
                     break;
                 }
+                Console.WriteLine($"Starting {newLevel} level...");
                 Agent agent = AgentFactory.InitAgent(newLevel);
                 currLevel = GameManager.StartPlay(agent);
                 PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
-                Console.WriteLine((!IsStop) ? "":"Well done, you're starting the next level...");  
             }
+            Console.WriteLine("Good Game! Bey bey.");
         }
 
     }

@@ -38,7 +38,6 @@ namespace SensorsGame.Service
                 level = agent.rank;
                 if (guess == "0")
                 {
-                    Console.WriteLine("Exit...");
                     level = "Exit";
                     break;
                 }
