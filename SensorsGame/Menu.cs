@@ -44,10 +44,10 @@ namespace SensorsGame
                     IsStop = true;
                     break;
                 }
-                IranianAgent agent = AgentFactory.InitAgent(newLevel);
+                Agent agent = AgentFactory.InitAgent(newLevel);
                 currLevel = GameManager.StartPlay(agent);
                 PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
-                Console.WriteLine((IsStop is false) ? "":"Well done, you're starting the next level...");  
+                Console.WriteLine((!IsStop) ? "":"Well done, you're starting the next level...");  
             }
         }
 

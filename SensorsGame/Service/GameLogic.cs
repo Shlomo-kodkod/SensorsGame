@@ -15,13 +15,6 @@ namespace SensorsGame
             "Signal Sensor", "Light Sensor"
             };
 
-        public static void UpdateActiveNum(IranianAgent agent)
-        {
-            foreach (Sensor sensor in agent.guessedSensors)
-            {
-                sensor.activationSum++;
-            }
-        }
 
         public static bool IsValidSensorType(string type)
         {
@@ -77,35 +70,7 @@ namespace SensorsGame
             return sensortypeOptions;
         }
 
-        public static Dictionary<int, string> GetBrokenSensors(IranianAgent agent)
-        {
-            string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
-            Dictionary<int, string> sensorsMap = new Dictionary<int, string>();
 
-            for (int i = 0; i < agent.guessedSensors.Count(); i++)
-            {
-                if (breakableSensors.Contains(agent.guessedSensors[i].type) &&
-                    (agent.guessedSensors[i].activationSum > 3))
-                {
-                    sensorsMap[i] = agent.guessedSensors[i].type;
-                }
-            }
-            return sensorsMap;
-        }
-
-        public static void RemoveBrokenSensore(IranianAgent agent, Dictionary<int, string> sensorsMap)
-        {
-            if ((agent.guessedSensors.Count() > 0) && (sensorsMap.Count > 0))
-            {
-                foreach (KeyValuePair<int, string> item in sensorsMap)
-                {
-                    Console.WriteLine($"Sensor is broken. Sensor type: {agent.guessedSensors[item.Key].type}");
-                    agent.UpdateIsSensorExposed(item.Value);
-                    agent.RemoveSensor(item.Key);
-                    agent.SubExposedNum();
-                }
-            }
-        }
 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class IranianAgent : IAgent
+    internal class Agent : IAgent
     {
 
         public string[] sensors { get; set; }
@@ -24,7 +24,7 @@ namespace SensorsGame
 
         public bool[] isSensorExposed;
 
-        public IranianAgent(string[] Sensors)
+        public Agent(string[] Sensors)
         {
             this.sensors = Sensors;
             this.isSensorExposed = new bool[sensors.Length];

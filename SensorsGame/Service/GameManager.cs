@@ -8,12 +8,12 @@ namespace SensorsGame.Service
 {
     internal static class GameManager
     {
-        public static string ActivateSensors(IranianAgent agent)
+        public static string ActivateSensors(Agent agent)
         {
             AgentManager.ResetWeaknessAndSensors(agent);
             AgentManager.TryToAttack(agent);
-            Dictionary<int, string> brokenSensors = GameLogic.GetBrokenSensors(agent);
-            GameLogic.RemoveBrokenSensore(agent, brokenSensors);
+            Dictionary<int, string> brokenSensors = AgentManager.GetBrokenSensors(agent);
+            AgentManager.RemoveBrokenSensore(agent, brokenSensors);
             string guess = GetSensorGuess(agent);
             if (guess.Equals("0"))
             {
@@ -22,12 +22,12 @@ namespace SensorsGame.Service
             Sensor newSensor = SensorFactory.CreateSensor(guess);
             newSensor.Activate(agent);
             agent.UpdateIsSensorExposed(GameLogic.ConvertChoiceTostring(guess));
-            GameLogic.UpdateActiveNum(agent);
+            AgentManager.UpdateActiveNum(agent);
             agent.turnCount++;
             return guess;
         }
 
-        public static string StartPlay(IranianAgent agent)
+        public static string StartPlay(Agent agent)
         {
             string guess = "";
             string level = "";
@@ -47,7 +47,7 @@ namespace SensorsGame.Service
             return level;
         }
 
-        public static string GetSensorGuess(IranianAgent agent)
+        public static string GetSensorGuess(Agent agent)
         {
             string guess = "";
             Sensor newSensor = null;
@@ -64,7 +64,7 @@ namespace SensorsGame.Service
             return guess;
         }
 
-        public static string DisplayState(IranianAgent agent)
+        public static string DisplayState(Agent agent)
         {
             return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
         }

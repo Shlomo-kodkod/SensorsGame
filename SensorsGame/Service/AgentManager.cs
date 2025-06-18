@@ -12,7 +12,7 @@ namespace SensorsGame
     {
         private static Random random = new Random();
 
-        public static void TryToAttack(IranianAgent agent)
+        public static void TryToAttack(Agent agent)
         {
             if ((agent.IsAttack) && (agent.attackNum > 0) &&
                 (!IsAbleToCancelsAttack(agent)) && (agent.turnCount != 0) &&
@@ -29,7 +29,7 @@ namespace SensorsGame
             }
         }
 
-        public static void UpdateCancelsAttack(IranianAgent agent)
+        public static void UpdateCancelsAttack(Agent agent)
         {
             foreach (Sensor sensor in agent.guessedSensors)
             {
@@ -41,7 +41,7 @@ namespace SensorsGame
             }
         }
 
-        public static bool IsAbleToCancelsAttack(IranianAgent agent)
+        public static bool IsAbleToCancelsAttack(Agent agent)
         {
             foreach (Sensor sensor in agent.guessedSensors)
             {
@@ -53,7 +53,7 @@ namespace SensorsGame
             return false;
         }
 
-        public static void ResetWeaknessAndSensors(IranianAgent agent)
+        public static void ResetWeaknessAndSensors(Agent agent)
         {
             if ((agent.rank == "Organization Leader") && (agent.turnCount != 0) &&
                 (agent.turnCount % 10 == 0))
@@ -68,6 +68,47 @@ namespace SensorsGame
                 }
             }
         }
+
+        public static void UpdateActiveNum(Agent agent)
+        {
+            foreach (Sensor sensor in agent.guessedSensors)
+            {
+                sensor.activationSum++;
+            }
+        }
+
+        public static Dictionary<int, string> GetBrokenSensors(Agent agent)
+        {
+            string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
+            Dictionary<int, string> sensorsMap = new Dictionary<int, string>();
+
+            for (int i = 0; i < agent.guessedSensors.Count(); i++)
+            {
+                if (breakableSensors.Contains(agent.guessedSensors[i].type) &&
+                    (agent.guessedSensors[i].activationSum > 3))
+                {
+                    sensorsMap[i] = agent.guessedSensors[i].type;
+                }
+            }
+            return sensorsMap;
+        }
+
+        public static void RemoveBrokenSensore(Agent agent, Dictionary<int, string> sensorsMap)
+        {
+            if ((agent.guessedSensors.Count() > 0) && (sensorsMap.Count > 0))
+            {
+                foreach (KeyValuePair<int, string> item in sensorsMap)
+                {
+                    Console.WriteLine($"Sensor is broken. Sensor type: {agent.guessedSensors[item.Key].type}");
+                    agent.UpdateIsSensorExposed(item.Value);
+                    agent.RemoveSensor(item.Key);
+                    agent.SubExposedNum();
+                }
+            }
+        }
+
+
+
 
 
     }
