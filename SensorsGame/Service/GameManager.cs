@@ -14,7 +14,7 @@ namespace SensorsGame.Service
             AgentManager.TryToAttack(agent);
             Dictionary<int, string> brokenSensors = GameLogic.GetBrokenSensors(agent);
             GameLogic.RemoveBrokenSensore(agent, brokenSensors);
-            string guess = GameUI.GetSensorGuess(agent);
+            string guess = GetSensorGuess(agent);
             if (guess.Equals("0"))
             {
                 return guess;
@@ -34,7 +34,7 @@ namespace SensorsGame.Service
             do
             {
                 guess = ActivateSensors(agent);
-                Console.WriteLine(GameUI.DisplayState(agent));
+                Console.WriteLine(DisplayState(agent));
                 level = agent.rank;
                 if (guess == "0")
                 {
@@ -45,6 +45,28 @@ namespace SensorsGame.Service
             }
             while (!agent.IsExposed());
             return level;
+        }
+
+        public static string GetSensorGuess(IranianAgent agent)
+        {
+            string guess = "";
+            Sensor newSensor = null;
+            do
+            {
+                Console.WriteLine($"---Sensor options---\n" + $"{GameLogic.GetSensorTypes()}" +
+                    "0. Exit.\n" +
+                    "Please enter your guess: "
+                    );
+                guess = Console.ReadLine();
+            }
+            while (!GameLogic.IsValidSensorType(guess));
+
+            return guess;
+        }
+
+        public static string DisplayState(IranianAgent agent)
+        {
+            return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
         }
 
     }
