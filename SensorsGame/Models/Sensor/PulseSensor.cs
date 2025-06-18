@@ -13,14 +13,5 @@ namespace SensorsGame
             this.type = "Pulse Sensor";
         }
 
-        public override void Activate(Agent agent)
-        {
-            if (agent.IsCorrect(this.type))
-            {
-                agent.DecrementExposedNum(this);
-                agent.AddExposedNum();
-            }
-        }
-
     }
 }

@@ -8,6 +8,7 @@ namespace SensorsGame
 {
     internal static class PlayerIdentification 
     {
+        //Check to see if the name is validate.
         private static bool IsValidUserName(string userName)
         {
             if((userName.Equals(" ")) || (userName.Length < 1) || (userName is null))
@@ -16,6 +17,8 @@ namespace SensorsGame
             }
             return true;
         }
+
+        //Create a new user name.
         private static string GetNewUserName()
         {
             string userName = "";
@@ -28,6 +31,8 @@ namespace SensorsGame
             while ((!IsValidUserName(userName)) || (!PlayersDAL.IsUniqueUserName(userName)));
             return userName;
         }
+
+        //Returns the new user name
         private static string GetUserName()
         {
             string userName = "";
@@ -40,12 +45,16 @@ namespace SensorsGame
             while (!IsValidUserName(userName));
             return userName;
         }
+
+        //Returns the password.
         private static string GetPassword()
         {
             Console.WriteLine("Enter Password: ");
             string pass = Console.ReadLine();
             return pass;
         }
+
+        //Creates a new player and adds it to the database.
         private static string[] CreatNewPlayer()
         {
             string userName = GetNewUserName();
@@ -53,6 +62,9 @@ namespace SensorsGame
             PlayersDAL.AddPlayer(userName, password, 1, "Foot Soldier");
             return new string[] {userName,password};
         }
+
+        //Verifies the details of the player.
+        //and creates a new player if it is not in the database.
         public static string[] EnterToGame()
         {
             string username = GetUserName();

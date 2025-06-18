@@ -13,13 +13,12 @@ namespace SensorsGame
         public int sensorSlots { get; set; }
         public int exposedNum { get; set; }
 
-        public int GetSensorsCount();
         public bool IsCorrect(string type);
         public bool IsExposed();
         public void AddExposedNum();
         public void SubExposedNum();
         public void RemoveSensor(int index);
-        public void DecrementExposedNum(Sensor sensor);
+        public void AttachingNewSensor(Sensor sensor);
 
 
 

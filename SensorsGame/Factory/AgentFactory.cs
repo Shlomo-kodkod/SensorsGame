@@ -15,6 +15,7 @@ namespace SensorsGame
             "Signal Sensor", "Light Sensor"
         };
 
+        //Creating a mix of random weaknesses.
         public static string[] InitializeSensorsRandom(int sensorSlots)
         {
             string[] sensorsOptions = new string[sensorSlots];
@@ -50,7 +51,7 @@ namespace SensorsGame
             return sensorsOptions;
         }
 
-
+        //Creating a new agent with weaknesses.
         public static Agent InitAgent(string agentType = "")
         {
             Agent result = null;

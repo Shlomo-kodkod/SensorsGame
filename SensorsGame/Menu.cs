@@ -11,6 +11,8 @@ namespace SensorsGame
     internal static class Menu
     {
         private static string[] levels = new string[] { "Foot Soldier", "Squad Leader", "Senior Commander", "Organization Leader" };
+
+        //Displays thewelcome screen for the game.
         public static void DisplayEntryScreen()
         {
 
@@ -31,6 +33,8 @@ namespace SensorsGame
                 """
                 );
         }
+
+        //start the game.
         public static void Play()
         {
             DisplayEntryScreen();

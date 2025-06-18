@@ -17,15 +17,15 @@ namespace SensorsGame
 
         public bool IsBroken = false;
 
+        //Activates the sensor and attaches it to the agent if it is on the list of weaknesses.
         public virtual void Activate(Agent agent)
         {
             if (agent.IsCorrect(this.type))
             {
-                agent.DecrementExposedNum(this);
+                agent.AttachingNewSensor(this);
                 agent.AddExposedNum();
             }
         }
 
-        
     }
 }

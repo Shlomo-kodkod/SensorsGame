@@ -13,6 +13,8 @@ namespace SensorsGame
             this.type = "Signal Sensor";
         }
 
+        //Activates the sensor and attaches it to the agent if he is on the list of weaknesses
+        //and reveals details about the agent.
         public override void Activate(Agent agent)
         {
 
@@ -20,7 +22,7 @@ namespace SensorsGame
             if (agent.IsCorrect(this.type))
             {
                 Console.WriteLine($"You've uncovered information about the agent. Agent rank is: {agent.rank}");
-                agent.DecrementExposedNum(this);
+                agent.AttachingNewSensor(this);
                 agent.AddExposedNum();
             }
         }

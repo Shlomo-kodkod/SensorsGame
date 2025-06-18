@@ -14,9 +14,5 @@ namespace SensorsGame
             this.cancelsAttackSum = 0;
         }
 
-        public void UpdateCancelAttack()
-        {
-            this.cancelsAttackSum++;
-        }
     }
 }

@@ -33,11 +33,8 @@ namespace SensorsGame
                 this.isSensorExposed[i] = false;
             }
         }
-        public int GetSensorsCount()
-        {
-            return this.sensorSlots;
-        }
 
+        //Check if the agent has this weakness.
         public bool IsCorrect(string type)
         {
             for (int i = 0; i < sensors.Length; i++)
@@ -50,6 +47,7 @@ namespace SensorsGame
             return false;
         }
 
+        //Updates the status of the exposed weakness in the list of weaknesses.
         public void UpdateIsSensorExposed(string type)
         {
             for (int i = 0; i < this.sensors.Length; i++)
@@ -67,21 +65,25 @@ namespace SensorsGame
             }
         }
 
+        //Check  if all the weaknesses have been identified.
         public bool IsExposed()
         {
             return this.exposedNum == this.sensorSlots;
         }
 
+        //Update the number of weaknesses exposed.
         public void AddExposedNum()
         {
             ++this.exposedNum;
         }
 
+        //Update the number of weaknesses exposed.
         public void SubExposedNum()
         {
             --this.exposedNum;
         }
 
+        //Deletes a sensor from the sensors attached to the agent.
         public void RemoveSensor(int index)
         {
             if (this.guessedSensors.Count() > index)
@@ -90,7 +92,8 @@ namespace SensorsGame
             }
         }
 
-        public void DecrementExposedNum(Sensor sensor)
+        //Attach a new sensor to the agent
+        public void AttachingNewSensor(Sensor sensor)
         {
             this.guessedSensors.Add(sensor);
         }
