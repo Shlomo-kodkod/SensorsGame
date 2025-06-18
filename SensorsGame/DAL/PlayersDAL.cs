@@ -11,6 +11,7 @@ namespace SensorsGame
     {
         private static string connStr = "server=localhost;user=root;password=;database=sensorsgame";
 
+        //Adding a new player to the data base.
         public static void AddPlayer(string UserName, string SecretPass, int GameLevel, string AgentType)
         {
             try
@@ -40,6 +41,8 @@ namespace SensorsGame
                 Console.WriteLine("Failed to create a new player");
             }
         }
+
+        //Returns player data from the database.
         public static Player GetPlayerData (string user, string pass)
         {
             string query = $"SELECT * FROM players WHERE userName = @userName AND secretPass = @pass";
@@ -78,6 +81,8 @@ namespace SensorsGame
             }
             return player;
         }
+
+        //Updates the current player level in the database.
         public static void UpdateLevel(string user, string pass, string type)
         {
             try
@@ -102,6 +107,8 @@ namespace SensorsGame
                 FileLog.LogToFile(user, $"Failed to update player level. Error: {ex}");
             }
         }
+
+        //Checks whether the user name already exists in the database.
         public static bool IsUniqueUserName(string name)
         {
             string query = "SELECT COUNT(*) AS count FROM players WHERE userName = @name";
@@ -133,6 +140,8 @@ namespace SensorsGame
             }
             return false;
         }
+
+        //Check  if the player already exists in the database.
         public static bool IsPlayerExist(string user, string pass)
         {
             string query = $"SELECT id FROM players WHERE userName = @user AND secretPass = @password;";

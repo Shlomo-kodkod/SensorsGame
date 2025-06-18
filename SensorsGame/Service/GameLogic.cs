@@ -16,6 +16,7 @@ namespace SensorsGame
             };
 
 
+        //hecking if the sensor name is validate.
         public static bool IsValidSensorType(string type)
         {
             if (validChoice.Contains(type))
@@ -26,6 +27,8 @@ namespace SensorsGame
             return false;
         }
 
+        //Converts the number that the user has entered
+        //into the name of a matching sensor.
         public static string ConvertChoiceTostring(string type)
         {
             string newSensor = " ";
@@ -59,6 +62,7 @@ namespace SensorsGame
             return newSensor;
         }
 
+        //Returns the type of sensor.
         public static string GetSensorTypes()
         {
             string sensortypeOptions = "";

@@ -8,6 +8,7 @@ namespace SensorsGame
 {
     internal static class SensorFactory
     {
+        //Creating a new sensor.
         public static Sensor CreateSensor(string type)
         {
             Sensor newSensor = null;

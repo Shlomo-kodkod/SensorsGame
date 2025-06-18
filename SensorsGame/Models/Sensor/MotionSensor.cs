@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class MotionSensor : PulseSensor
+    internal class MotionSensor : Sensor
     {
         public MotionSensor()
         {

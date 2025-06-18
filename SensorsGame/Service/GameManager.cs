@@ -8,6 +8,7 @@ namespace SensorsGame
 {
     internal static class GameManager
     {
+        //Activating the sensors on the list. erases broken sensors and attacks if possible.
         private static string ActivateSensors(Agent agent)
         {
             AgentManager.ResetWeaknessAndSensors(agent);
@@ -27,6 +28,7 @@ namespace SensorsGame
             return guess;
         }
 
+        //Activating agent's investigation.
         public static string StartPlay(Agent agent)
         {
             string guess = "";
@@ -46,6 +48,7 @@ namespace SensorsGame
             return level;
         }
 
+        //Returns the user guess.
         private static string GetSensorGuess(Agent agent)
         {
             string guess = "";
@@ -63,9 +66,10 @@ namespace SensorsGame
             return guess;
         }
 
+        //Shows the number of weaknesses that have been exposed.
         private static string DisplayState(Agent agent)
         {
-            return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
+            return $"Your match is: {agent.exposedNum}/{agent.sensorSlots}";
         }
 
     }
