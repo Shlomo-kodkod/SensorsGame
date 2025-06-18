@@ -48,7 +48,7 @@ namespace SensorsGame
                     {
                         break;
                     }
-                    Console.WriteLine($"Starting level {i + 1}...");
+                    Console.WriteLine($"\nStarting level {i + 1}...\n");
                     Agent agent = AgentFactory.InitAgent(levels[i]);
                     currLevel = GameManager.StartPlay(agent);
                     PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
@@ -56,6 +56,5 @@ namespace SensorsGame
                 Console.WriteLine("Good Game! Bey bey.");
             }
         }
-
     }
 }

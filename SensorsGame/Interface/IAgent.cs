@@ -8,11 +8,6 @@ namespace SensorsGame
 {
     internal interface IAgent
     {
-        public string[] sensors { get; set; }
-        public string rank { get; set; }
-        public int sensorSlots { get; set; }
-        public int exposedNum { get; set; }
-
         public bool IsCorrect(string type);
         public void UpdateIsSensorExposed(string type);
         public bool IsExposed();

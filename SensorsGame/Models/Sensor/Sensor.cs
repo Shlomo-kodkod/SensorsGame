@@ -8,12 +8,13 @@ namespace SensorsGame
 {
     internal class Sensor : ISensor
     {
-        public string type { get; set; }
+        public string type;
 
         public int activationSum = 0;
 
         public bool isCancelsCounterAttack = false;
-        public int cancelsAttackSum { get; set; }
+
+        public int cancelsAttackSum;
 
         public bool IsBroken = false;
 

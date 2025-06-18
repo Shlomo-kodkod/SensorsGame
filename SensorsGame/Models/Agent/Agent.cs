@@ -9,10 +9,13 @@ namespace SensorsGame
     internal class Agent : IAgent
     {
 
-        public string[] sensors { get; set; }
-        public string rank { get; set; }
-        public int sensorSlots { get; set; }
-        public int exposedNum { get; set; }
+        public string[] sensors;
+
+        public string rank;
+
+        public int sensorSlots;
+
+        public int exposedNum;
 
         public bool IsAttack = false;
 

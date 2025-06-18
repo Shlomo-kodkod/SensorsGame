@@ -8,8 +8,6 @@ namespace SensorsGame
 {
     internal interface ISensor
     {
-        public string type { get; set; }
-
         public void Activate(Agent agent);
 
     }
