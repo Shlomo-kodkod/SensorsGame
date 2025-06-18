@@ -12,7 +12,7 @@ namespace SensorsGame
     {
         private static string[] levels = new string[] { "Foot Soldier", "Squad Leader", "Senior Commander", "Organization Leader" };
 
-        //Displays thewelcome screen for the game.
+        //Displays the welcome screen for the game.
         public static void DisplayEntryScreen()
         {
 

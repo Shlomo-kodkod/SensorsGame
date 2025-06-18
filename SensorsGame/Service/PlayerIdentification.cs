@@ -11,11 +11,17 @@ namespace SensorsGame
         //Check to see if the name is validate.
         private static bool IsValidUserName(string userName)
         {
-            if((userName.Equals(" ")) || (userName.Length < 1) || (userName is null))
+            if((userName.Equals(" ")) || (userName is null))
             {
+                Console.WriteLine("Username can't be empty. Please try again.");
                 return false;
             }
-            return true;
+            else if(userName.Length < 4)
+            {
+                Console.WriteLine("Username must contains at least 4 characters.");
+                return false;
+            }
+                return true;
         }
 
         //Create a new user name.
@@ -24,7 +30,7 @@ namespace SensorsGame
             string userName = "";
             do
             {
-                Console.WriteLine("Enter user name: ");
+                Console.WriteLine("Enter a new user name of at least 4 characters: ");
                 userName = Console.ReadLine();
                 Console.WriteLine((!IsValidUserName(userName)) || (!PlayersDAL.IsUniqueUserName(userName)) ? "Invalid user name. Try again" : "");
             }
@@ -38,9 +44,8 @@ namespace SensorsGame
             string userName = "";
             do
             {
-                Console.WriteLine("Enter user name: ");
+                Console.WriteLine("Enter your user name: ");
                 userName = Console.ReadLine();
-                Console.WriteLine(!IsValidUserName(userName) ? "Invalid user name. Try again" : "");
             }
             while (!IsValidUserName(userName));
             return userName;
@@ -49,8 +54,14 @@ namespace SensorsGame
         //Returns the password.
         private static string GetPassword()
         {
-            Console.WriteLine("Enter Password: ");
-            string pass = Console.ReadLine();
+            string pass = "";
+            do
+            {
+                Console.WriteLine("Enter your Password: ");
+                pass = Console.ReadLine();
+                Console.WriteLine(pass.Length < 8 ? "Invalid password please try again. password must contains at least 8 characters.":"");
+            }
+            while (pass.Length < 8);
             return pass;
         }
 
@@ -74,13 +85,9 @@ namespace SensorsGame
             {
                 return new string[] { username, password };
             }
-            else if (PlayersDAL.IsUniqueUserName(username))
-            {
-                PlayersDAL.AddPlayer(username, password, 1, "Foot Soldier");
-                return new string[] { username, password };
-            }
+            Console.WriteLine("You are not registered in the system.\n" +
+                    "Please enter username and password to register.");
             return CreatNewPlayer();
         }
-
     }
 }
