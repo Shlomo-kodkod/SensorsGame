@@ -39,19 +39,27 @@ namespace SensorsGame
         {
             DisplayEntryScreen();
             string[] playerInformation = PlayerIdentification.EnterToGame();
-            string currLevel = "";
-            for(int i = 0; i < levels.Length; i++)
+            if (PlayerIdentification.IsAuthorized(playerInformation)) 
             {
-                if(currLevel.Equals("Exit") || currLevel.Equals("Organization Leader"))
+                string currLevel = "";
+                for (int i = 0; i < levels.Length; i++)
                 {
-                    break;
+                    if (currLevel.Equals("Exit") || currLevel.Equals("Organization Leader"))
+                    {
+                        break;
+                    }
+                    Console.WriteLine($"Starting level {i + 1}...");
+                    Agent agent = AgentFactory.InitAgent(levels[i]);
+                    currLevel = GameManager.StartPlay(agent);
+                    PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
                 }
-                Console.WriteLine($"Starting level {i + 1}...");
-                Agent agent = AgentFactory.InitAgent(levels[i]);
-                currLevel = GameManager.StartPlay(agent);
-                PlayersDAL.UpdateLevel(playerInformation[0], playerInformation[1], agent.rank);
+                Console.WriteLine("Good Game! Bey bey.");
             }
-            Console.WriteLine("Good Game! Bey bey.");
+            else
+            {
+                Console.WriteLine("Login error. You can’t play the game right now, please try it later.");
+            }
+
         }
 
     }

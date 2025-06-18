@@ -16,7 +16,7 @@ namespace SensorsGame
                 Console.WriteLine("Username can't be empty. Please try again.");
                 return false;
             }
-            else if(userName.Length < 4)
+            else if(userName.Trim().Length < 4)
             {
                 Console.WriteLine("Username must contains at least 4 characters.");
                 return false;
@@ -59,9 +59,9 @@ namespace SensorsGame
             {
                 Console.WriteLine("Enter your Password: ");
                 pass = Console.ReadLine();
-                Console.WriteLine(pass.Length < 8 ? "Invalid password please try again. password must contains at least 8 characters.":"");
+                Console.WriteLine(pass.Trim().Length < 8 ? "Invalid password please try again. password must contains at least 8 characters.":"");
             }
-            while (pass.Length < 8);
+            while (pass.Trim().Length < 8);
             return pass;
         }
 
@@ -88,6 +88,19 @@ namespace SensorsGame
             Console.WriteLine("You are not registered in the system.\n" +
                     "Please enter username and password to register.");
             return CreatNewPlayer();
+        }
+
+        //Checking whether the user connection was successful.
+        public static bool IsAuthorized(string[] player)
+        {
+            if (player.Length == 2)
+            {
+                if(PlayersDAL.IsPlayerExist(player[0], player[1]))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
