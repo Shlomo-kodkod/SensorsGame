@@ -14,6 +14,7 @@ namespace SensorsGame
         public int exposedNum { get; set; }
 
         public bool IsCorrect(string type);
+        public void UpdateIsSensorExposed(string type);
         public bool IsExposed();
         public void AddExposedNum();
         public void SubExposedNum();
