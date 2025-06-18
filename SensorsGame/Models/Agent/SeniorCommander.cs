@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorsGame
 {
-    internal class SeniorCommander : IranianAgent
+    internal class SeniorCommander : Agent
     {
         public SeniorCommander(string[] sensor) : base(sensor)
         {

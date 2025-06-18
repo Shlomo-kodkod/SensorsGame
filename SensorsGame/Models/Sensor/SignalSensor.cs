@@ -13,7 +13,7 @@ namespace SensorsGame
             this.type = "Signal Sensor";
         }
 
-        public override void Activate(IranianAgent agent)
+        public override void Activate(Agent agent)
         {
 
 

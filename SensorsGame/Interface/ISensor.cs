@@ -10,7 +10,7 @@ namespace SensorsGame
     {
         public string type { get; set; }
 
-        public void Activate(IranianAgent agent);
+        public void Activate(Agent agent);
 
     }
 }

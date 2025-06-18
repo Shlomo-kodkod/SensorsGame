@@ -17,7 +17,7 @@ namespace SensorsGame
 
         public bool IsBroken = false;
 
-        public virtual void Activate(IranianAgent agent)
+        public virtual void Activate(Agent agent)
         {
             if (agent.IsCorrect(this.type))
             {

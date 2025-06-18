@@ -14,7 +14,7 @@ namespace SensorsGame
             this.type = "Thermal Sensor";
         }
 
-        public override void Activate(IranianAgent agent)
+        public override void Activate(Agent agent)
         {
             if (agent.IsCorrect(this.type))
             {
@@ -24,7 +24,7 @@ namespace SensorsGame
             }
         }
 
-        public string RevealsOneSensore(IranianAgent agent)
+        public string RevealsOneSensore(Agent agent)
         {
             int weaknessLength = agent.GetSensorsCount();
             int randomIndex = random.Next(0, weaknessLength);

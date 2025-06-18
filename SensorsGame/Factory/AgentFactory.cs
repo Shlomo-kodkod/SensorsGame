@@ -51,9 +51,9 @@ namespace SensorsGame.Service
         }
 
 
-        public static IranianAgent InitAgent(string agentType = "")
+        public static Agent InitAgent(string agentType = "")
         {
-            IranianAgent result = null;
+            Agent result = null;
             switch (agentType)
             {
                 case "Foot Soldier":
