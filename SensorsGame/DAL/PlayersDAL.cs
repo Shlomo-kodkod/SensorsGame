@@ -31,11 +31,13 @@ namespace SensorsGame
                     }
                 }
 
-                Console.WriteLine("New player successfully added!");
+                FileLog.LogToFile(UserName, "Player successfully added");
+                Console.WriteLine("New Player successfully added!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                FileLog.LogToFile(UserName, $"Failed to create a new player. Error: {ex.Message}");
+                Console.WriteLine("Failed to create a new player");
             }
         }
         public static Player GetPlayerData (string user, string pass)
@@ -63,7 +65,7 @@ namespace SensorsGame
                                 string agentType = reader.GetString("agentType");
 
                                 player = new Player(userName, password, gameLevel, agentType);
-                                
+                                FileLog.LogToFile(user, "Player data was successfully received");
                             }
                         }
                     }
@@ -72,7 +74,7 @@ namespace SensorsGame
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error : {ex.Message}");
+                FileLog.LogToFile(user, $"Failed to get player data. Error: {ex}");
             }
             return player;
         }
@@ -93,12 +95,11 @@ namespace SensorsGame
                         cmd.ExecuteNonQuery();
                     }
                 }
-
-                Console.WriteLine($"Level changed successfully to {type}!");
+                FileLog.LogToFile(user, $"Level successfully update to {type}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                FileLog.LogToFile(user, $"Failed to update player level. Error: {ex}");
             }
         }
         public static bool IsUniqueUserName(string name)
@@ -128,7 +129,7 @@ namespace SensorsGame
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error : {ex.Message}");
+                FileLog.LogToFile(name, $"Checking is unique username Failed. Error : {ex.Message}");
             }
             return false;
         }
@@ -158,7 +159,7 @@ namespace SensorsGame
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error : {ex.Message}");
+                FileLog.LogToFile(user, $"Checking if player exist Failed. Error: {ex.Message}");
             }
             return false;
         }
