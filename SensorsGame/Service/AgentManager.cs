@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorsGame.Service;
+using SensorsGame;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace SensorsGame

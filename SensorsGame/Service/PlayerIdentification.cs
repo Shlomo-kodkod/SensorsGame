@@ -8,7 +8,7 @@ namespace SensorsGame
 {
     internal static class PlayerIdentification 
     {
-        public static bool IsValidUserName(string userName)
+        private static bool IsValidUserName(string userName)
         {
             if((userName.Equals(" ")) || (userName.Length < 1) || (userName is null))
             {
@@ -16,7 +16,7 @@ namespace SensorsGame
             }
             return true;
         }
-        public static string GetNewUserName()
+        private static string GetNewUserName()
         {
             string userName = "";
             do
@@ -28,7 +28,7 @@ namespace SensorsGame
             while ((!IsValidUserName(userName)) || (!PlayersDAL.IsUniqueUserName(userName)));
             return userName;
         }
-        public static string GetUserName()
+        private static string GetUserName()
         {
             string userName = "";
             do
@@ -40,13 +40,13 @@ namespace SensorsGame
             while (!IsValidUserName(userName));
             return userName;
         }
-        public static string GetPassword()
+        private static string GetPassword()
         {
             Console.WriteLine("Enter Password: ");
             string pass = Console.ReadLine();
             return pass;
         }
-        public static string[] CreatNewPlayer()
+        private static string[] CreatNewPlayer()
         {
             string userName = GetNewUserName();
             string password = GetPassword();

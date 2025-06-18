@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorsGame.Service
+namespace SensorsGame
 {
     internal static class GameManager
     {
-        public static string ActivateSensors(Agent agent)
+        private static string ActivateSensors(Agent agent)
         {
             AgentManager.ResetWeaknessAndSensors(agent);
             AgentManager.TryToAttack(agent);
@@ -46,7 +46,7 @@ namespace SensorsGame.Service
             return level;
         }
 
-        public static string GetSensorGuess(Agent agent)
+        private static string GetSensorGuess(Agent agent)
         {
             string guess = "";
             Sensor newSensor = null;
@@ -63,7 +63,7 @@ namespace SensorsGame.Service
             return guess;
         }
 
-        public static string DisplayState(Agent agent)
+        private static string DisplayState(Agent agent)
         {
             return $"Your match is: {agent.exposedNum}/{agent.GetSensorsCount()}";
         }
