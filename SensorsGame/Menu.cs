@@ -55,11 +55,6 @@ namespace SensorsGame
                 }
                 Console.WriteLine("Good Game! Bey bey.");
             }
-            else
-            {
-                Console.WriteLine("Login error. You can’t play the game right now, please try it later.");
-            }
-
         }
 
     }

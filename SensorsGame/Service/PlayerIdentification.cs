@@ -100,6 +100,7 @@ namespace SensorsGame
                     return true;
                 }
             }
+            Console.WriteLine("Login error. You can’t play the game right now, please try it later.");
             return false;
         }
     }
