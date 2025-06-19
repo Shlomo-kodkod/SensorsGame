@@ -22,7 +22,6 @@ namespace SensorsGame
             }
             ISensor newSensor = SensorFactory.CreateSensor(guess);
             newSensor.Activate(agent);
-            //agent.UpdateSensorToExposed(GameLogic.ConvertChoiceTostring(guess));
             AgentManager.UpdateActiveNum(agent);
             agent.turnCount++;
             return guess;
