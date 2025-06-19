@@ -13,7 +13,7 @@ namespace SensorsGame
         private static Random random = new Random();
 
         //Removes a sensor attached if the agent can attack.
-        public static void TryToAttack(Agent agent)
+        public static void TryToAttack(IAgent agent)
         {
             if ((agent.IsAttack) && (agent.attackNum > 0) &&
                 (!IsAbleToCancelsAttack(agent)) && (agent.turnCount != 0) &&
@@ -31,9 +31,9 @@ namespace SensorsGame
         }
 
         //Updating the number of canceled attacks.
-        public static void UpdateCancelsAttack(Agent agent)
+        public static void UpdateCancelsAttack(IAgent agent)
         {
-            foreach (Sensor sensor in agent.guessedSensors)
+            foreach (ISensor sensor in agent.guessedSensors)
             {
                 if ((sensor.isCancelsCounterAttack) && (sensor.cancelsAttackSum < 2))
                 {
@@ -44,9 +44,9 @@ namespace SensorsGame
         }
 
         //Checking if the sensor can Cancel the attack.
-        public static bool IsAbleToCancelsAttack(Agent agent)
+        public static bool IsAbleToCancelsAttack(IAgent agent)
         {
-            foreach (Sensor sensor in agent.guessedSensors)
+            foreach (ISensor sensor in agent.guessedSensors)
             {
                 if ((sensor.isCancelsCounterAttack) && (sensor.cancelsAttackSum < 2))
                 {
@@ -57,7 +57,7 @@ namespace SensorsGame
         }
 
         //Resetting the list of weaknesses and sensors attached.
-        public static void ResetWeaknessAndSensors(Agent agent)
+        public static void ResetWeaknessAndSensors(IAgent agent)
         {
             if ((agent.rank == "Organization Leader") && (agent.turnCount != 0) &&
                 (agent.turnCount % 10 == 0))
@@ -74,16 +74,16 @@ namespace SensorsGame
         }
 
         //Updates the number of times each sensor has been activated.
-        public static void UpdateActiveNum(Agent agent)
+        public static void UpdateActiveNum(IAgent agent)
         {
-            foreach (Sensor sensor in agent.guessedSensors)
+            foreach (ISensor sensor in agent.guessedSensors)
             {
                 sensor.activationSum++;
             }
         }
 
         //Returns a dictionary of the broken sensors.
-        public static Dictionary<int, string> GetBrokenSensors(Agent agent)
+        public static Dictionary<int, string> GetBrokenSensors(IAgent agent)
         {
             string[] breakableSensors = new string[] { "Pulse Sensor", "Motion Sensor" };
             Dictionary<int, string> sensorsMap = new Dictionary<int, string>();
@@ -100,7 +100,7 @@ namespace SensorsGame
         }
 
         //Erasing the broken sensors.
-        public static void RemoveBrokenSensore(Agent agent, Dictionary<int, string> sensorsMap)
+        public static void RemoveBrokenSensore(IAgent agent, Dictionary<int, string> sensorsMap)
         {
             if ((agent.guessedSensors.Count() > 0) && (sensorsMap.Count > 0))
             {

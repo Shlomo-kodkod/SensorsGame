@@ -17,7 +17,7 @@ namespace SensorsGame
 
         //Activates the sensor and attaches it to the agent if it is on the list of weaknesses
         //and reveals the name of a sensor from the list of weaknesses
-        public override void Activate(Agent agent)
+        public override void Activate(IAgent agent)
         {
             if (agent.IsCorrect(this.type))
             {
@@ -28,7 +28,7 @@ namespace SensorsGame
         }
 
         //Reveals the name of a sensor from the list of weaknesses.
-        public string RevealsOneSensore(Agent agent)
+        public string RevealsOneSensore(IAgent agent)
         {
             int weaknessLength = agent.sensorSlots;
             int randomIndex = random.Next(0, weaknessLength);

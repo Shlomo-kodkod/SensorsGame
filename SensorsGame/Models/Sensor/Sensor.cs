@@ -8,18 +8,25 @@ namespace SensorsGame
 {
     internal class Sensor : ISensor
     {
-        public string type;
+        public string type { get; set; }
 
-        public int activationSum = 0;
+        public int activationSum { get; set; }
 
-        public bool isCancelsCounterAttack = false;
+        public bool isCancelsCounterAttack { get; set; }
 
-        public int cancelsAttackSum;
+        public int cancelsAttackSum { get; set; }
 
-        public bool IsBroken = false;
+        public bool IsBroken { get; set; }
+
+        public Sensor()
+        {
+            this.activationSum = 0;
+            this.isCancelsCounterAttack = false;
+            this.IsBroken = false;
+        }
 
         //Activates the sensor and attaches it to the agent if it is on the list of weaknesses.
-        public virtual void Activate(Agent agent)
+        public virtual void Activate(IAgent agent)
         {
             if (agent.IsCorrect(this.type))
             {

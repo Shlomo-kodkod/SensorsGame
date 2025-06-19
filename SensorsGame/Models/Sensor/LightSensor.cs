@@ -15,7 +15,7 @@ namespace SensorsGame
 
         //Activates the sensor and attaches it to the agent if he is on the list of weaknesses
         //and reveals details about the agent.
-        public override void Activate(Agent agent)
+        public override void Activate(IAgent agent)
         {
             if (agent.IsCorrect(this.type))
             {

@@ -52,9 +52,9 @@ namespace SensorsGame
         }
 
         //Creating a new agent with weaknesses.
-        public static Agent InitAgent(string agentType = "")
+        public static IAgent InitAgent(string agentType = "")
         {
-            Agent result = null;
+            IAgent result = null;
             switch (agentType)
             {
                 case "Foot Soldier":

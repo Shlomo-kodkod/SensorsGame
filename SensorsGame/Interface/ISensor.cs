@@ -8,7 +8,17 @@ namespace SensorsGame
 {
     internal interface ISensor
     {
-        public void Activate(Agent agent);
+        public string type { get; set; }
+
+        public int activationSum { get; set; }
+
+        public bool isCancelsCounterAttack { get; set; }
+
+        public int cancelsAttackSum { get; set; }
+
+        public bool IsBroken { get; set; }
+
+        public void Activate(IAgent agent);
 
     }
 }
