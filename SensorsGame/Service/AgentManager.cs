@@ -107,9 +107,9 @@ namespace SensorsGame
                 foreach (KeyValuePair<int, string> item in sensorsMap)
                 {
                     Console.WriteLine($"Sensor is broken. Sensor type: {agent.guessedSensors[item.Key].type}");
-                    agent.UpdateIsSensorExposed(item.Value);
-                    agent.RemoveSensor(item.Key);
+                    agent.UpdateSensorToExposed(item.Value);
                     agent.SubExposedNum();
+                    agent.RemoveSensor(item.Key);
                 }
             }
         }
