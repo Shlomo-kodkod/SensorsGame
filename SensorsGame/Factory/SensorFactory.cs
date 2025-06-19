@@ -9,9 +9,9 @@ namespace SensorsGame
     internal static class SensorFactory
     {
         //Creating a new sensor.
-        public static Sensor CreateSensor(string type)
+        public static ISensor CreateSensor(string type)
         {
-            Sensor newSensor = null;
+            ISensor newSensor = null;
             switch (type)
             {
                 case "1":

@@ -9,28 +9,34 @@ namespace SensorsGame
     internal class Agent : IAgent
     {
 
-        public string[] sensors;
+        public string[] sensors { get; set; }
 
-        public string rank;
+        public bool[] isSensorExposed { get; set; }
 
-        public int sensorSlots;
+        public List<ISensor> guessedSensors { get; set; }
 
-        public int exposedNum;
+        public string rank { get; set; }
 
-        public bool IsAttack = false;
+        public int sensorSlots { get; set; }
 
-        public int turnCount = 0;
+        public int exposedNum { get; set; }
 
-        public int attackNum;
+        public bool IsAttack { get; set; }
 
-        public List<Sensor> guessedSensors = new List<Sensor>();
+        public int turnCount { get; set; }
 
-        public bool[] isSensorExposed;
+        public int attackNum { get; set; }
+
+
 
         public Agent(string[] Sensors)
         {
             this.sensors = Sensors;
+            this.guessedSensors = new List<ISensor>();
             this.isSensorExposed = new bool[sensors.Length];
+            this.IsAttack = false;
+            this.turnCount = 0;
+
             for(int i = 0; i < sensors.Length; i++)
             {
                 this.isSensorExposed[i] = false;
@@ -96,7 +102,7 @@ namespace SensorsGame
         }
 
         //Attach a new sensor to the agent
-        public void AttachingNewSensor(Sensor sensor)
+        public void AttachingNewSensor(ISensor sensor)
         {
             this.guessedSensors.Add(sensor);
         }
