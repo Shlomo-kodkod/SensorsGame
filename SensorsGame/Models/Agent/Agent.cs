@@ -56,19 +56,27 @@ namespace SensorsGame
             return false;
         }
 
-        //Updates the status of the exposed weakness in the list of weaknesses.
-        public void UpdateIsSensorExposed(string type)
+        //Updates the status of the exposed weakness in the list of weaknesses to Exposed.
+        public void UpdateSensorToExposed(string type)
+        {
+            for (int i = 0; i < this.sensors.Length; i++)
+            {
+                if ((this.sensors[i] == type) && (!this.isSensorExposed[i]))
+                {
+                    this.isSensorExposed[i] = true;
+                    break;
+                }
+            }
+        }
+
+        //Updates the status of the exposed weakness in the list of weaknesses to UnExposed.
+        public void UpdateSensorToUnExposed(string type)
         {
             for (int i = 0; i < this.sensors.Length; i++)
             {
                 if (this.sensors[i] == type && this.isSensorExposed[i])
                 {
                     this.isSensorExposed[i] = false;
-                    break;
-                }
-                else if ((this.sensors[i] == type) && (!this.isSensorExposed[i]))
-                {
-                    this.isSensorExposed[i] = true;
                     break;
                 }
             }
