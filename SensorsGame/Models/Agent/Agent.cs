@@ -74,7 +74,7 @@ namespace SensorsGame
         {
             for (int i = 0; i < this.sensors.Length; i++)
             {
-                if (this.sensors[i] == type && this.isSensorExposed[i])
+                if ((this.sensors[i] == type) && (this.isSensorExposed[i]))
                 {
                     this.isSensorExposed[i] = false;
                     break;

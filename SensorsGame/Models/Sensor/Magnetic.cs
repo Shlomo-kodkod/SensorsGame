@@ -10,6 +10,7 @@ namespace SensorsGame
     {
         public Magnetic()
         {
+            this.type = "Magnetic";
             this.isCancelsCounterAttack = true;
             this.cancelsAttackSum = 0;
         }

@@ -15,18 +15,25 @@ namespace SensorsGame
         //Removes a sensor attached if the agent can attack.
         public static void TryToAttack(IAgent agent)
         {
-            if ((agent.IsAttack) && (agent.attackNum > 0) &&
-                (!IsAbleToCancelsAttack(agent)) && (agent.turnCount != 0) &&
-                (agent.turnCount % 3 == 0) && (agent.guessedSensors.Count() > 0))
+            if ((agent.IsAttack) && (!IsAbleToCancelsAttack(agent)) &&
+                 (agent.turnCount != 0) && (agent.turnCount % 3 == 0) &&
+                 (agent.guessedSensors.Count() > 0))
             {
                 int range = agent.guessedSensors.Count();
                 int index = random.Next(0, range);
+                string senType = agent.guessedSensors[index].type;
                 agent.RemoveSensor(index);
+                agent.UpdateSensorToUnExposed(senType);
                 Console.WriteLine("Agent committed an attack. One sensor was erased.");
-                UpdateCancelsAttack(agent);
                 agent.SubExposedNum();
                 agent.attackNum--;
 
+            }
+            else if ((agent.IsAttack) && (agent.attackNum > 0) &&
+                (IsAbleToCancelsAttack(agent)) && (agent.turnCount != 0) &&
+                (agent.turnCount % 3 == 0) && (agent.guessedSensors.Count() > 0))
+            {
+                UpdateCancelsAttack(agent);
             }
         }
 
@@ -107,7 +114,7 @@ namespace SensorsGame
                 foreach (KeyValuePair<int, string> item in sensorsMap)
                 {
                     Console.WriteLine($"Sensor is broken. Sensor type: {agent.guessedSensors[item.Key].type}");
-                    agent.UpdateSensorToExposed(item.Value);
+                    agent.UpdateSensorToUnExposed(item.Value);
                     agent.SubExposedNum();
                     agent.RemoveSensor(item.Key);
                 }
